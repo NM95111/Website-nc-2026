@@ -1,0 +1,35 @@
+# Claude / Cowork internal files
+CLAUDE.md
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encdata
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Editor & IDE settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node (in case npm is ever used)
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Environment variables / secrets — NEVER commit these
+.env
+.env.local
+.env.*.local
+
+# Build output (if a build tool is ever added)
+/dist
+/build
+/_site
