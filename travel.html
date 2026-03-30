@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel & Accommodation | Nicolas & Cecilia</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Inline Styles for Lebanon Travel Section -->
+    <style>
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .restaurant-names {
+            list-style: none;
+            padding: 0;
+        }
+
+        .restaurant-names li {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .restaurant-names li:last-child {
+            border-bottom: none;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .tip-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            background: #fff;
+            padding: 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .tip-emoji {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .tip-text {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .restaurant-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="site-nav">
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Welcome</a></li>
+            <li><a href="our-story.html">Our Story</a></li>
+            <li><a href="travel.html">Travel &amp; Accommodation</a></li>
+            <li><a href="registry.html">Our Registry</a></li>
+            <li><a href="rsvp.html">RSVP</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero hero-short">
+            <div class="hero-bg" style="background-image: url('images/travel & accomodation Top photo.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="hero-content">
+                <h1 class="script-heading">Travel &amp; Accommodation</h1>
+                <p class="hero-subtitle">Beirut, Lebanon</p>
+            </div>
+        </section>
+
+        <!-- Things to Do Section Intro -->
+        <section class="section section-sage">
+            <div class="section-inner">
+                <h2 class="section-heading">THINGS TO DO IN LEBANON</h2>
+                <p class="section-text">
+                    Lebanon is a country like no other — ancient history, stunning nature, and a vibrant food and nightlife scene all in one place. Here are our top picks to make the most of your stay:
+                </p>
+            </div>
+        </section>
+
+        <!-- Activity Cards Grid -->
+        <section class="section section-white">
+            <div class="section-inner">
+                <div class="card-grid">
+                    <!-- Card 1: Pigeon Rocks -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Pigeon Rocks (Raouché)</h3>
+                            <p>The most iconic landmark in Beirut — two natural rock arches rising from the sea at Raouché. Best at sunset.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Jeita Grotto -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1523978591478-c753949ff840?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Jeita Grotto</h3>
+                            <p>A spectacular system of limestone caves 18km north of Beirut, considered one of the natural wonders of the world.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Baalbek -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Baalbek</h3>
+                            <p>Home to some of the best-preserved Roman ruins in the world, including the magnificent Temple of Jupiter.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Byblos (Jbeil) -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1519923041107-20a929b53f22?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Byblos (Jbeil)</h3>
+                            <p>One of the oldest continuously inhabited cities in the world. Explore the ancient port, crusader castle, and charming old souk.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Beirut Corniche -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Beirut Corniche</h3>
+                            <p>A beloved 4.8km seafront promenade — great for a morning walk, sunset stroll, or watching local life unfold.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: Cedars of God -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Cedars of God (Bsharri)</h3>
+                            <p>A UNESCO World Heritage Site — a sacred grove of ancient cedar trees in the mountains of northern Lebanon.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 7: Faraya & Mzaar Skiing -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Faraya &amp; Mzaar (Skiing)</h3>
+                            <p>Ski in Lebanon! Faraya Mzaar is the largest ski resort in the Middle East, just 1.5 hours from Beirut.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 8: Qadisha Valley -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Qadisha Valley</h3>
+                            <p>A UNESCO-listed valley with ancient monasteries carved into dramatic cliffsides — one of Lebanon's most beautiful hikes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 9: Tyre (Sour) -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1540474874074-8948897d81b2?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Tyre (Sour)</h3>
+                            <p>A UNESCO World Heritage Site with Roman hippodrome ruins, ancient columns, and beautiful Mediterranean beaches.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 10: Zaitunay Bay -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Zaitunay Bay</h3>
+                            <p>Beirut's chic waterfront marina lined with restaurants, cafés, and stunning views of the city skyline.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 11: Tripoli -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1466554929517-a7efb3b11ef1?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Tripoli</h3>
+                            <p>Lebanon's second city is home to a magnificent crusader citadel, bustling souks, and the best kanafeh in the country.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 12: Chouf & Beiteddine Palace -->
+                    <div class="card fade-in">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1574236170894-3d53e3cf4bcd?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h3>Chouf &amp; Beiteddine Palace</h3>
+                            <p>A stunning 19th-century Lebanese palace set amid the Chouf mountains, surrounded by cedar and oak forests.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Where to Eat & Drink Section -->
+        <section class="eat-drink" style="background-image: url('images/WHERE TO EAT AND DRINK BAKCGROUND.jpg'); background-size: cover; background-position: center;">
+            <div class="section-inner">
+                <h2 class="section-heading">WHERE TO EAT &amp; DRINK</h2>
+                <p class="eat-drink-subtitle">FOR MORE INFORMATION CLICK ON THE NAME</p>
+
+                <div class="restaurant-grid">
+                    <!-- LEBANESE -->
+                    <div class="restaurant-category">
+                        <h3 style="color: rgba(255,255,255,0.95); margin-bottom: 1.2rem; font-size: 1.1rem;">LEBANESE</h3>
+                        <ul class="restaurant-names">
+                            <li>Em Sherif Cafe</li>
+                            <li>Em Sherif</li>
+                            <li>Liza</li>
+                            <li>Beit Kanz</li>
+                            <li>Abd El Wahab</li>
+                            <li>Tawlet</li>
+                            <li>Balchig Zaitunay Bay</li>
+                            <li>Sporting</li>
+                        </ul>
+                    </div>
+
+                    <!-- STREET FOOD -->
+                    <div class="restaurant-category">
+                        <h3 style="color: rgba(255,255,255,0.95); margin-bottom: 1.2rem; font-size: 1.1rem;">STREET FOOD</h3>
+                        <ul class="restaurant-names">
+                            <li>Mano</li>
+                            <li>Barbar</li>
+                            <li>Hajj Nasr</li>
+                            <li>Crew Hut</li>
+                            <li>Boubouffe</li>
+                            <li>Eddy's Street Food</li>
+                        </ul>
+                    </div>
+
+                    <!-- INTERNATIONAL -->
+                    <div class="restaurant-category">
+                        <h3 style="color: rgba(255,255,255,0.95); margin-bottom: 1.2rem; font-size: 1.1rem;">INTERNATIONAL</h3>
+                        <ul class="restaurant-names">
+                            <li>Albergo</li>
+                            <li>Anthaus Beirut</li>
+                            <li>Casablanca</li>
+                            <li>Mayrig</li>
+                            <li>Le Sushi Bar</li>
+                            <li>Odette's Taqueria</li>
+                            <li>Centrale</li>
+                            <li>Marly's</li>
+                            <li>Maison Prunelle</li>
+                            <li>Meat the Fish</li>
+                            <li>Malitiou</li>
+                            <li>Burgundy</li>
+                            <li>Villa Clara</li>
+                            <li>Buco Burger Bar</li>
+                            <li>Belhousie</li>
+                            <li>Terrible Prince</li>
+                        </ul>
+                    </div>
+
+                    <!-- OUTSIDE BEIRUT -->
+                    <div class="restaurant-category">
+                        <h3 style="color: rgba(255,255,255,0.95); margin-bottom: 1.2rem; font-size: 1.1rem;">OUTSIDE BEIRUT</h3>
+                        <ul class="restaurant-names">
+                            <li>Pierre & Friends</li>
+                            <li>Joining Baitroun</li>
+                            <li>Oyster</li>
+                            <li>Beit el Halab</li>
+                            <li>Tahet El Rih</li>
+                            <li>Samket Gerge Dayae</li>
+                            <li>Mounir</li>
+                            <li>Tallet Nasr</li>
+                            <li>L'Os</li>
+                            <li>Marchak Aal Baher</li>
+                            <li>Beit El Captain</li>
+                            <li>Colonel Brewery And Distillery</li>
+                            <li>Grecco</li>
+                            <li>Margherita Mare</li>
+                        </ul>
+                    </div>
+
+                    <!-- COFFEE SHOPS -->
+                    <div class="restaurant-category">
+                        <h3 style="color: rgba(255,255,255,0.95); margin-bottom: 1.2rem; font-size: 1.1rem;">COFFEE SHOPS</h3>
+                        <ul class="restaurant-names">
+                            <li>Levant - Sweet Moments</li>
+                            <li>Kalei Coffee Co. (Rue Sia)</li>
+                            <li>BEYt Mar Mikhael</li>
+                            <li>The Slow</li>
+                            <li>BackBurner</li>
+                            <li>Base Coffee</li>
+                        </ul>
+                    </div>
+
+                    <!-- BREAKFAST -->
+                    <div class="restaurant-category">
+                        <h3 style="color: rgba(255,255,255,0.95); margin-bottom: 1.2rem; font-size: 1.1rem;">BREAKFAST</h3>
+                        <ul class="restaurant-names">
+                            <li>Nayla Beirut</li>
+                            <li>The Lebanese Bakery</li>
+                            <li>The Sage Parlour</li>
+                            <li>The Barn</li>
+                            <li>Paul</li>
+                            <li>The Glow Paradise</li>
+                            <li>Ginette</li>
+                        </ul>
+                    </div>
+
+                    <!-- DRINKS & BARS (Hamifeh strip) -->
+                    <div class="restaurant-category">
+                        <h3 style="color: rgba(255,255,255,0.95); margin-bottom: 1.2rem; font-size: 1.1rem;">DRINKS &amp; BARS (Hamifeh strip)</h3>
+                        <ul class="restaurant-names">
+                            <li>L'abeille D'or</li>
+                            <li>El Haitab</li>
+                            <li>Amal Bohsali</li>
+                            <li>Zaitar W Zeit</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Travel Tips Section -->
+        <section class="section section-cream">
+            <div class="section-inner">
+                <h2 class="section-heading">TIPS FOR FIRST-TIMERS IN LEBANON</h2>
+                <p class="section-text">For first-timers in Lebanon, you're in for a treat!</p>
+
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <span class="tip-emoji">🛂</span>
+                        <p class="tip-text">Get an E-SIM installed before you travel, or pick up a SIM at the airport with internet bundles</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">💵</span>
+                        <p class="tip-text">Cards are accepted in most places, but keep some cash on you in USD or LBP</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">🍽️</span>
+                        <p class="tip-text">Lebanese dishes not to miss: mannousheh cheese & zaatar, kebbeh, fatteh, weras anab</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">🗣️</span>
+                        <p class="tip-text">English & French are widely spoken — feel free to show off your Arabic habibi!</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">🚰</span>
+                        <p class="tip-text">Please don't drink the tap water as it is not filtered</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">📱</span>
+                        <p class="tip-text">Toters is the local delivery app to satisfy any midnight cravings!</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">🚗</span>
+                        <p class="tip-text">Car rentals are available at the airport, but buckle up — driving in Lebanon is not for the faint-hearted</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">✈️</span>
+                        <p class="tip-text">MEA & Transavia offer direct flights from Europe including London, Paris and Amsterdam</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">🚨</span>
+                        <p class="tip-text">Emergency: Red Cross 140 · Police 112</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">🗺️</span>
+                        <p class="tip-text">Please make sure not to go to Dahiye and the South</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">🚕</span>
+                        <p class="tip-text">Taxis are only payable by cash</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">🛂</span>
+                        <p class="tip-text">Your passport must be valid for at least 3 months beyond your entry date and have at least 2 blank pages. No Israeli stamps, visas, or seals.</p>
+                    </div>
+
+                    <div class="tip-item">
+                        <span class="tip-emoji">📞</span>
+                        <p class="tip-text">When you arrive, you may be asked for: return/onward ticket, proof of accommodation, and a contact number in Lebanon — use Yara Boulos: +96170120801</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p class="footer-title">NICOLAS AND CECILIA</p>
+        <p class="footer-copy">&copy; 2025 by Nicolas and Cecilia</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

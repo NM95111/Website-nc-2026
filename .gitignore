@@ -1,5 +1,9 @@
 # Claude / Cowork internal files
 CLAUDE.md
+MEMORY.md
+
+# Development/reference folders — not part of the public site
+OLD-INDEX/
 
 # macOS
 .DS_Store

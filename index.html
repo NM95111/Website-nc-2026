@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicolas & Cecilia — Wedding</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Home Page Specific Styles -->
+    <style>
+        .hero-logo {
+            width: 100px;
+            margin: 0 auto 1.5rem;
+            display: block;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn-outline-white {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.85rem 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            color: #fff;
+            border-radius: 4px;
+            transition: all 0.3s;
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+        }
+
+        .btn-outline-white:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .info-cards {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 2rem;
+            min-width: 200px;
+        }
+
+        .info-card .card-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1rem;
+        }
+
+        .info-card .card-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card .card-value {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--text-dark);
+        }
+
+        .itinerary-list {
+            list-style: none;
+            max-width: 500px;
+            margin: 2rem auto 0;
+            padding: 0;
+        }
+
+        .itinerary-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .itinerary-item:last-child {
+            border-bottom: none;
+        }
+
+        .itinerary-time {
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            min-width: 70px;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .itinerary-icon {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+        }
+
+        .itinerary-name {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .venue-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 500px;
+        }
+
+        .venue-img {
+            background: url('images/Home Page/Picture 3 - the venue.jpg') center/cover no-repeat;
+            min-height: 400px;
+        }
+
+        .venue-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem 3rem;
+            background: var(--cream);
+        }
+
+        .venue-info h2 {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .venue-info h3 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .venue-info p {
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-directions {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.85rem 2.5rem;
+            border: 1px solid var(--sage);
+            color: var(--sage);
+            border-radius: 4px;
+            transition: all 0.3s;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-directions:hover {
+            background: var(--sage);
+            color: #fff;
+        }
+
+        .photo-strip {
+            height: 400px;
+            background: url('images/Home Page/Picture 2 - where when time.jpg') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-strip::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .photo-strip-text {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            font-family: var(--font-script);
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .venue-section {
+                grid-template-columns: 1fr;
+            }
+
+            .venue-img {
+                min-height: 300px;
+            }
+
+            .venue-info {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .photo-strip {
+                height: 250px;
+            }
+
+            .photo-strip-text {
+                font-size: 2rem;
+            }
+
+            .info-cards {
+                gap: 1rem;
+            }
+
+            .info-card {
+                padding: 1.5rem;
+                min-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="site-nav">
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Welcome</a></li>
+            <li><a href="our-story.html">Our Story</a></li>
+            <li><a href="travel.html">Travel &amp; Accommodation</a></li>
+            <li><a href="registry.html">Our Registry</a></li>
+            <li><a href="rsvp.html">RSVP</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- SECTION 1: Hero Section -->
+        <section class="hero" style="background-image: url('images/Home Page/Picture 1 - Top part.jpg');">
+            <div class="hero-content">
+                <img src="images/C_N Logo SVG - Web Transparent.svg" alt="Nicolas & Cecilia" class="hero-logo">
+                <h1 class="script-heading">Nicolas &amp; Cecilia</h1>
+                <p class="hero-subtitle">Saturday, 22 February 2025</p>
+                <div class="hero-cta">
+                    <a href="rsvp.html" class="btn-outline-white">RSVP</a>
+                    <a href="registry.html" class="btn-outline-white">Our Registry</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Wedding Invitation -->
+        <section class="section section-cream">
+            <div class="section-content">
+                <div style="text-align: center; font-family: var(--font-heading); color: var(--text-dark); line-height: 1.8;">
+                    <p style="font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-light); margin-bottom: 2rem;">Request the honour of your presence at the wedding of</p>
+                    <p style="font-size: 1.1rem; letter-spacing: 0.1em; margin-bottom: 2rem;">
+                        ELIE MALHA <span style="display: block; margin-top: 0.5rem;"></span>
+                        &amp;
+                        <span style="display: block; margin-top: 0.5rem;"></span>
+                        GHADA KHOURY
+                    </p>
+                    <p style="font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-light); margin-bottom: 2rem;">at the wedding of their son and daughter</p>
+                    <p style="font-family: var(--font-script); font-size: 2.5rem; font-style: italic; color: var(--text-dark);">Nicolas &amp; Cecilia</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Date / Time / Venue Info Cards -->
+        <section class="section section-white">
+            <div class="section-content">
+                <div class="info-cards">
+                    <!-- Date Card -->
+                    <div class="info-card">
+                        <img src="images/Rings.svg" alt="Date" class="card-icon">
+                        <p class="card-label">Date</p>
+                        <p class="card-value">22 February 2025</p>
+                    </div>
+
+                    <!-- Time Card -->
+                    <div class="info-card">
+                        <div class="card-icon" style="display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">⏰</div>
+                        <p class="card-label">Time</p>
+                        <p class="card-value">5:00 PM</p>
+                    </div>
+
+                    <!-- Venue Card -->
+                    <div class="info-card">
+                        <div class="card-icon" style="display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">📍</div>
+                        <p class="card-label">Venue</p>
+                        <p class="card-value">Address Montgomerie<br style="display: none;"><span style="font-size: 0.85rem;">Dubai, UAE</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: The Itinerary -->
+        <section class="section section-sage">
+            <div class="section-content">
+                <h2 class="section-heading" style="color: #fff; text-align: center; margin-bottom: 2rem;">The Itinerary</h2>
+                <ul class="itinerary-list" style="color: #fff;">
+                    <li class="itinerary-item">
+                        <span class="itinerary-time">5:00 PM</span>
+                        <img src="images/Welcome.svg" alt="" class="itinerary-icon">
+                        <span class="itinerary-name">Guest Arrival</span>
+                    </li>
+                    <li class="itinerary-item">
+                        <span class="itinerary-time">5:30 PM</span>
+                        <img src="images/Rings.svg" alt="" class="itinerary-icon">
+                        <span class="itinerary-name">Wedding Ceremony</span>
+                    </li>
+                    <li class="itinerary-item">
+                        <span class="itinerary-time">6:00 PM</span>
+                        <img src="images/Toast.svg" alt="" class="itinerary-icon">
+                        <span class="itinerary-name">Cocktail Hour &amp; Photographs</span>
+                    </li>
+                    <li class="itinerary-item">
+                        <span class="itinerary-time">7:30 PM</span>
+                        <img src="images/Dinner.svg" alt="" class="itinerary-icon">
+                        <span class="itinerary-name">Dinner &amp; Toasts</span>
+                    </li>
+                    <li class="itinerary-item">
+                        <span class="itinerary-time">10:30 PM</span>
+                        <img src="images/Cake.svg" alt="" class="itinerary-icon">
+                        <span class="itinerary-name">Cake Cutting</span>
+                    </li>
+                    <li class="itinerary-item">
+                        <span class="itinerary-time">11:00 PM</span>
+                        <img src="images/Music.svg" alt="" class="itinerary-icon">
+                        <span class="itinerary-name">Indoor Afterparty</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 5: The Venue -->
+        <section class="section section-white">
+            <div class="venue-section">
+                <div class="venue-img"></div>
+                <div class="venue-info">
+                    <h2>The Venue</h2>
+                    <h3>Address Montgomerie</h3>
+                    <p>Dubai — United Arab Emirates</p>
+                    <a href="https://maps.google.com/?q=Address+Montgomerie+Dubai" class="btn-directions" target="_blank">Get Directions</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: Photo Strip with Tagline -->
+        <section class="photo-strip">
+            <p class="photo-strip-text">Join us as we celebrate our love</p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p class="footer-title">NICOLAS AND CECILIA</p>
+        <p class="footer-copy">&copy; 2025 by Nicolas and Cecilia</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

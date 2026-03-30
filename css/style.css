@@ -1,0 +1,829 @@
+/* ============================================
+   Nicolas & Cecilia — Wedding Website
+   Color Palette: Sage green, warm whites, muted gold
+   Font: Google Fonts — Cormorant Garamond (headings),
+         Montserrat (body), Great Vibes (script accent)
+   ============================================ */
+
+/* --- CSS Variables --- */
+:root {
+  --sage: #8a9a7b;
+  --sage-dark: #6b7d5e;
+  --sage-light: #c5d1bc;
+  --cream: #faf8f5;
+  --warm-white: #ffffff;
+  --text-dark: #3a3a3a;
+  --text-medium: #6b6b6b;
+  --text-light: #999999;
+  --gold-muted: #c2a97e;
+  --border-light: #e8e4df;
+  --overlay-dark: rgba(0, 0, 0, 0.35);
+  --overlay-light: rgba(0, 0, 0, 0.15);
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Montserrat', 'Segoe UI', sans-serif;
+  --font-script: 'Great Vibes', cursive;
+  --max-width: 1200px;
+  --nav-height: 70px;
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background-color: var(--cream);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--sage-dark);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--gold-muted);
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.script-heading {
+  font-family: var(--font-script);
+  font-weight: 400;
+}
+
+/* --- Navigation --- */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-light);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-medium);
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--sage);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--sage-dark);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* Hamburger menu (mobile) */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: absolute;
+  right: 1.5rem;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-dark);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* --- Hero Sections --- */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  margin-top: var(--nav-height);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-dark);
+}
+
+.hero-bg.blur::after {
+  background: var(--overlay-light);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  padding: 2rem;
+}
+
+.hero-content .script-heading {
+  font-size: clamp(3rem, 8vw, 6rem);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content .subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  font-weight: 400;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Smaller hero for subpages */
+.hero-short {
+  height: 70vh;
+  min-height: 400px;
+}
+
+/* Placeholder for missing images */
+.hero-placeholder {
+  background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+}
+
+/* --- Sections --- */
+.section {
+  padding: 5rem 2rem;
+}
+
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section-sage {
+  background-color: var(--sage);
+  color: #fff;
+}
+
+.section-cream {
+  background-color: var(--cream);
+}
+
+.section-white {
+  background-color: var(--warm-white);
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--sage-dark);
+}
+
+.section-sage .section-heading {
+  color: #fff;
+}
+
+.section-text {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-medium);
+}
+
+.section-sage .section-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* --- Timeline (Our Story) --- */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 3rem auto 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background: var(--border-light);
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.timeline-item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.timeline-photo {
+  flex: 0 0 250px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--sage-light);
+  border: 3px solid var(--border-light);
+}
+
+.timeline-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Placeholder circle when no image */
+.timeline-photo.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  text-align: center;
+  padding: 1rem;
+}
+
+.timeline-info {
+  flex: 1;
+}
+
+.timeline-info h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 0.3rem;
+}
+
+.timeline-info p {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-medium);
+  font-weight: 500;
+}
+
+/* --- Activity Cards (Travel) --- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: var(--warm-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  background: var(--sage-light);
+  background-size: cover;
+  background-position: center;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-body h3 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  color: var(--text-medium);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.card-link {
+  display: inline-block;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--sage-dark);
+  border: 1px solid var(--sage);
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.card-link:hover {
+  background: var(--sage);
+  color: #fff;
+}
+
+/* --- Restaurant / Eat & Drink Section --- */
+.eat-drink {
+  padding: 5rem 2rem;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #fff;
+}
+
+.eat-drink::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.eat-drink .section-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.eat-drink .section-heading {
+  color: #fff;
+}
+
+.eat-drink-subtitle {
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  opacity: 0.8;
+}
+
+.restaurant-category {
+  margin-bottom: 3rem;
+}
+
+.restaurant-category h3 {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--gold-muted);
+}
+
+.restaurant-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.5rem 0;
+}
+
+.restaurant-row .cuisine {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  min-width: 120px;
+}
+
+.restaurant-row .names {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.restaurant-row .names a {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.restaurant-row .names a:hover {
+  color: var(--gold-muted);
+}
+
+.drinks-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.drinks-list a {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.drinks-list a:hover {
+  color: var(--gold-muted);
+}
+
+/* --- Registry Section --- */
+.registry-block {
+  text-align: center;
+  padding: 2.5rem;
+  border-bottom: 1px solid var(--border-light);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.registry-block:last-of-type {
+  border-bottom: none;
+}
+
+.registry-block h3 {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.registry-block p {
+  font-size: 0.9rem;
+  color: var(--text-medium);
+  line-height: 1.8;
+}
+
+.registry-note {
+  font-style: italic;
+  color: var(--sage) !important;
+  margin-top: 2rem;
+}
+
+/* --- RSVP Form --- */
+.rsvp-form {
+  max-width: 550px;
+  margin: 2rem auto 0;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-medium);
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  background: var(--warm-white);
+  color: var(--text-dark);
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--sage);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-sage {
+  background: var(--sage);
+  color: #fff;
+}
+
+.btn-sage:hover {
+  background: var(--sage-dark);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--sage-dark);
+  border: 1px solid var(--sage);
+}
+
+.btn-outline:hover {
+  background: var(--sage);
+  color: #fff;
+}
+
+/* --- Footer --- */
+.site-footer {
+  background: var(--sage);
+  color: #fff;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.footer-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* --- Utilities --- */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 2rem; }
+.mt-4 { margin-top: 3rem; }
+.mb-2 { margin-bottom: 1rem; }
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 1.5rem 0;
+    gap: 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 1rem 2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero {
+    height: 80vh;
+    min-height: 400px;
+  }
+
+  .hero-short {
+    height: 50vh;
+  }
+
+  .hero-content .script-heading {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .section {
+    padding: 3rem 1.5rem;
+  }
+
+  /* Timeline stacked on mobile */
+  .timeline::before {
+    left: 30px;
+  }
+
+  .timeline-item,
+  .timeline-item:nth-child(even) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .timeline-photo {
+    flex: 0 0 180px;
+    width: 180px;
+    height: 180px;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .restaurant-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .eat-drink {
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links a {
+    font-size: 0.75rem;
+  }
+
+  .hero-content .script-heading {
+    font-size: 2.5rem;
+  }
+
+  .section-heading {
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================================
+   Enhanced Mobile Responsiveness
+   ============================================ */
+
+/* Timeline: better mobile layout */
+@media (max-width: 768px) {
+  .timeline::before { display: none; }
+
+  .timeline-item,
+  .timeline-item:nth-child(even) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .timeline-photo {
+    flex: 0 0 200px;
+    width: 200px;
+    height: 200px;
+  }
+
+  .timeline-info h3 { font-size: 1.2rem; }
+}
+
+/* Cards: single column on small screens */
+@media (max-width: 480px) {
+  .card-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+  .card-img { height: 180px; }
+}
+
+/* Eat & Drink section: better mobile */
+@media (max-width: 768px) {
+  .eat-drink { padding: 3rem 1rem; background-attachment: scroll; }
+  .restaurant-row { flex-direction: column; gap: 0.2rem; margin-bottom: 0.5rem; }
+  .restaurant-row .cuisine { font-size: 0.75rem; }
+}
+
+/* Section padding reduced on mobile */
+@media (max-width: 480px) {
+  .section { padding: 2.5rem 1rem; }
+  .section-heading { font-size: 1.4rem; letter-spacing: 0.08em; }
+  .section-text { font-size: 0.95rem; }
+}
+
+/* Registry blocks: full width on mobile */
+@media (max-width: 480px) {
+  .registry-block { padding: 1.5rem 1rem; }
+}
+
+/* RSVP form: full width on mobile */
+@media (max-width: 480px) {
+  .rsvp-form { padding: 0; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea { font-size: 1rem; }
+  .btn { width: 100%; text-align: center; }
+}
+
+/* Hero text: better mobile sizing */
+@media (max-width: 480px) {
+  .hero-content .script-heading { font-size: 3rem; }
+  .hero-content .subtitle { font-size: 0.8rem; letter-spacing: 0.15em; }
+  .hero-short { height: 55vh; }
+}
+
+/* Footer: mobile padding */
+@media (max-width: 480px) {
+  .site-footer { padding: 2rem 1rem; }
+  .footer-title { font-size: 1rem; }
+}
+
+/* Nav: ensure hamburger works properly */
+@media (max-width: 768px) {
+  .site-nav { padding: 0 1rem; }
+  .nav-links { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .nav-links a { font-size: 0.85rem; }
+}
+
+/* Images: prevent overflow */
+img { max-width: 100%; height: auto; }
+.timeline-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
