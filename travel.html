@@ -13,38 +13,70 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Inline Styles for Lebanon Travel Section -->
     <style>
+        /* ---- TRAVEL PAGE QUICK-JUMP BUTTONS ---- */
+        .travel-quicknav {
+            background: var(--warm-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.85rem;
+            flex-wrap: wrap;
+            position: sticky;
+            top: var(--nav-height);
+            z-index: 100;
+        }
+        .travel-quicknav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--wine);
+            background: transparent;
+            border: 1px solid rgba(107,45,62,0.3);
+            border-radius: 50px;
+            padding: 0.55rem 1.3rem;
+            transition: background 0.25s, border-color 0.25s, color 0.25s;
+            text-decoration: none;
+        }
+        .travel-quicknav a:hover,
+        .travel-quicknav a.active {
+            background: var(--wine);
+            border-color: var(--wine);
+            color: #fff;
+        }
+
+        /* ---- TIPS SECTION ---- */
         .restaurant-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 2rem;
         }
-
         .restaurant-names {
             list-style: none;
             padding: 0;
         }
-
         .restaurant-names li {
             padding: 0.4rem 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             font-size: 0.9rem;
             color: rgba(255,255,255,0.85);
         }
-
         .restaurant-names li:last-child {
             border-bottom: none;
         }
-
         .tips-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.2rem;
             margin-top: 2rem;
         }
-
         .tip-item {
             display: flex;
             gap: 1rem;
@@ -54,13 +86,11 @@
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
-
         .tip-emoji {
             font-size: 1.4rem;
             flex-shrink: 0;
             line-height: 1;
         }
-
         .tip-text {
             font-size: 0.9rem;
             color: var(--text-medium);
@@ -68,15 +98,15 @@
         }
 
         @media (max-width: 768px) {
-            .restaurant-grid {
-                grid-template-columns: 1fr;
-            }
+            .restaurant-grid { grid-template-columns: 1fr; }
+            .travel-quicknav { gap: 0.6rem; padding: 1rem 1rem; }
+            .travel-quicknav a { font-size: 0.6rem; padding: 0.5rem 0.9rem; }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="site-nav">
+    <nav class="site-nav" id="site-nav">
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
             <span></span>
             <span></span>
@@ -85,27 +115,135 @@
         <ul class="nav-links">
             <li><a href="index.html">Welcome</a></li>
             <li><a href="our-story.html">Our Story</a></li>
-            <li><a href="travel.html">Travel &amp; Accommodation</a></li>
+            <li><a href="travel.html" class="active">Travel &amp; Accommodation</a></li>
             <li><a href="registry.html">Our Registry</a></li>
             <li><a href="rsvp.html">RSVP</a></li>
         </ul>
     </nav>
 
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section class="hero hero-short">
-            <div class="hero-bg" style="background-image: url('images/travel & accomodation Top photo.jpg'); background-size: cover; background-position: center;"></div>
+        <!-- ==================== HERO ==================== -->
+        <section class="hero hero-short" style="background-image: url('https://images.unsplash.com/photo-1547481887-a26e2cacb5aa?w=1600&q=85'); background-position: center 40%;">
             <div class="hero-content">
+                <span class="hero-page-label">Getting Here</span>
                 <h1 class="script-heading">Travel &amp; Accommodation</h1>
-                <p class="hero-subtitle">Beirut, Lebanon</p>
+                <div class="hero-accent-block">
+                    <div class="hero-accent-line"></div>
+                    <div class="hero-subtitle-block">
+                        <p>Beirut, Lebanon</p>
+                        <p>Everything you need to plan your trip</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Things to Do Section Intro -->
-        <section class="section section-sage">
+        <!-- ==================== QUICK-JUMP NAV ==================== -->
+        <nav class="travel-quicknav" aria-label="Page sections">
+            <a href="#tips">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:11px;height:11px;flex-shrink:0;">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 8v4l2.5 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Tips for First-Timers
+            </a>
+            <a href="#things-to-do">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:11px;height:11px;flex-shrink:0;">
+                    <path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Things to Do
+            </a>
+            <a href="#eat-drink">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:11px;height:11px;flex-shrink:0;">
+                    <path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="6" y1="1" x2="6" y2="4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="10" y1="1" x2="10" y2="4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="14" y1="1" x2="14" y2="4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Where to Eat &amp; Drink
+            </a>
+        </nav>
+
+        <!-- ==================== (1) TIPS FOR FIRST-TIMERS ==================== -->
+        <section class="section section-cream" id="tips">
             <div class="section-inner">
-                <h2 class="section-heading">THINGS TO DO IN LEBANON</h2>
+                <h2 class="section-heading">Tips for First-Timers in Lebanon</h2>
+                <p class="section-text">Coming to Lebanon for the first time? You're in for a treat. Here's everything you need to know before you arrive.</p>
+
+                <div class="tips-grid">
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">✈️</span>
+                        <p class="tip-text">MEA &amp; Transavia offer direct flights from Europe including London, Paris and Amsterdam</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">🛂</span>
+                        <p class="tip-text">Your passport must be valid for at least 3 months beyond your entry date and have at least 2 blank pages. No Israeli stamps, visas, or seals.</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">📞</span>
+                        <p class="tip-text">When you arrive, you may be asked for: return/onward ticket, proof of accommodation, and a contact number in Lebanon — use Yara Boulos: +96170120801</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">📱</span>
+                        <p class="tip-text">Get an E-SIM installed before you travel, or pick up a SIM at the airport with internet bundles</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">💵</span>
+                        <p class="tip-text">Cards are accepted in most places, but keep some cash on you in USD or LBP</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">🚕</span>
+                        <p class="tip-text">Taxis are only payable by cash</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">🚗</span>
+                        <p class="tip-text">Car rentals are available at the airport, but buckle up — driving in Lebanon is not for the faint-hearted</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">🚰</span>
+                        <p class="tip-text">Please don't drink the tap water as it is not filtered</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">🍽️</span>
+                        <p class="tip-text">Lebanese dishes not to miss: mannousheh cheese &amp; zaatar, kebbeh, fatteh, weras anab</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">🗣️</span>
+                        <p class="tip-text">English &amp; French are widely spoken — feel free to show off your Arabic habibi!</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">📱</span>
+                        <p class="tip-text">Toters is the local delivery app to satisfy any midnight cravings!</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">🗺️</span>
+                        <p class="tip-text">Please make sure not to go to Dahiye and the South</p>
+                    </div>
+
+                    <div class="tip-item fade-in">
+                        <span class="tip-emoji">🚨</span>
+                        <p class="tip-text">Emergency: Red Cross 140 &nbsp;·&nbsp; Police 112</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== (2) THINGS TO DO ==================== -->
+        <section class="section section-sage" id="things-to-do">
+            <div class="section-inner">
+                <h2 class="section-heading">Things to Do in Lebanon</h2>
                 <p class="section-text">
                     Lebanon is a country like no other — ancient history, stunning nature, and a vibrant food and nightlife scene all in one place. Here are our top picks to make the most of your stay:
                 </p>
@@ -154,7 +292,7 @@
 
                     <!-- Card 5: Beirut Corniche -->
                     <div class="card fade-in">
-                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80'); background-size: cover; background-position: center;"></div>
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80'); background-size: cover; background-position: center;"></div>
                         <div class="card-body">
                             <h3>Beirut Corniche</h3>
                             <p>A beloved 4.8km seafront promenade — great for a morning walk, sunset stroll, or watching local life unfold.</p>
@@ -227,10 +365,10 @@
             </div>
         </section>
 
-        <!-- Where to Eat & Drink Section -->
-        <section class="eat-drink" style="background-image: url('images/WHERE TO EAT AND DRINK BAKCGROUND.jpg'); background-size: cover; background-position: center;">
+        <!-- ==================== (3) WHERE TO EAT & DRINK ==================== -->
+        <section class="eat-drink" id="eat-drink" style="background-image: url('images/WHERE TO EAT AND DRINK BAKCGROUND.jpg'); background-size: cover; background-position: center;">
             <div class="section-inner">
-                <h2 class="section-heading">WHERE TO EAT &amp; DRINK</h2>
+                <h2 class="section-heading">Where to Eat &amp; Drink</h2>
                 <p class="eat-drink-subtitle">FOR MORE INFORMATION CLICK ON THE NAME</p>
 
                 <div class="restaurant-grid">
@@ -289,7 +427,7 @@
                     <div class="restaurant-category">
                         <h3 style="color: rgba(255,255,255,0.95); margin-bottom: 1.2rem; font-size: 1.1rem;">OUTSIDE BEIRUT</h3>
                         <ul class="restaurant-names">
-                            <li>Pierre & Friends</li>
+                            <li>Pierre &amp; Friends</li>
                             <li>Joining Baitroun</li>
                             <li>Oyster</li>
                             <li>Beit el Halab</li>
@@ -333,9 +471,9 @@
                         </ul>
                     </div>
 
-                    <!-- DRINKS & BARS (Hamifeh strip) -->
+                    <!-- DRINKS & BARS -->
                     <div class="restaurant-category">
-                        <h3 style="color: rgba(255,255,255,0.95); margin-bottom: 1.2rem; font-size: 1.1rem;">DRINKS &amp; BARS (Hamifeh strip)</h3>
+                        <h3 style="color: rgba(255,255,255,0.95); margin-bottom: 1.2rem; font-size: 1.1rem;">DRINKS &amp; BARS (Hamra strip)</h3>
                         <ul class="restaurant-names">
                             <li>L'abeille D'or</li>
                             <li>El Haitab</li>
@@ -347,89 +485,58 @@
             </div>
         </section>
 
-        <!-- Travel Tips Section -->
-        <section class="section section-cream">
-            <div class="section-inner">
-                <h2 class="section-heading">TIPS FOR FIRST-TIMERS IN LEBANON</h2>
-                <p class="section-text">For first-timers in Lebanon, you're in for a treat!</p>
-
-                <div class="tips-grid">
-                    <div class="tip-item">
-                        <span class="tip-emoji">🛂</span>
-                        <p class="tip-text">Get an E-SIM installed before you travel, or pick up a SIM at the airport with internet bundles</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">💵</span>
-                        <p class="tip-text">Cards are accepted in most places, but keep some cash on you in USD or LBP</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">🍽️</span>
-                        <p class="tip-text">Lebanese dishes not to miss: mannousheh cheese & zaatar, kebbeh, fatteh, weras anab</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">🗣️</span>
-                        <p class="tip-text">English & French are widely spoken — feel free to show off your Arabic habibi!</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">🚰</span>
-                        <p class="tip-text">Please don't drink the tap water as it is not filtered</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">📱</span>
-                        <p class="tip-text">Toters is the local delivery app to satisfy any midnight cravings!</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">🚗</span>
-                        <p class="tip-text">Car rentals are available at the airport, but buckle up — driving in Lebanon is not for the faint-hearted</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">✈️</span>
-                        <p class="tip-text">MEA & Transavia offer direct flights from Europe including London, Paris and Amsterdam</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">🚨</span>
-                        <p class="tip-text">Emergency: Red Cross 140 · Police 112</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">🗺️</span>
-                        <p class="tip-text">Please make sure not to go to Dahiye and the South</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">🚕</span>
-                        <p class="tip-text">Taxis are only payable by cash</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">🛂</span>
-                        <p class="tip-text">Your passport must be valid for at least 3 months beyond your entry date and have at least 2 blank pages. No Israeli stamps, visas, or seals.</p>
-                    </div>
-
-                    <div class="tip-item">
-                        <span class="tip-emoji">📞</span>
-                        <p class="tip-text">When you arrive, you may be asked for: return/onward ticket, proof of accommodation, and a contact number in Lebanon — use Yara Boulos: +96170120801</p>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Footer -->
     <footer class="site-footer">
-        <p class="footer-title">NICOLAS AND CECILIA</p>
-        <p class="footer-copy">&copy; 2025 by Nicolas and Cecilia</p>
+        <p class="footer-script">Nicolas &amp; Cecilia</p>
+        <div class="footer-ornament">
+            <svg viewBox="0 0 50 60" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="25" cy="18" rx="7" ry="7.5" fill="rgba(232,213,217,0.5)"/>
+                <ellipse cx="17" cy="30" rx="7" ry="7.5" fill="rgba(232,213,217,0.45)"/>
+                <ellipse cx="33" cy="30" rx="7" ry="7.5" fill="rgba(232,213,217,0.45)"/>
+                <ellipse cx="25" cy="42" rx="7" ry="7.5" fill="rgba(232,213,217,0.38)"/>
+                <path d="M25 10 Q30 4 36 2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <p class="footer-date">18 September &nbsp;·&nbsp; Lebanon</p>
     </footer>
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
+    <script>
+        // Transparent nav → solid on scroll
+        const nav = document.getElementById('site-nav');
+        function updateNav() { nav.classList.toggle('scrolled', window.scrollY > 80); }
+        window.addEventListener('scroll', updateNav, { passive: true });
+        updateNav();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Highlight active quick-nav button on scroll
+        var sections = document.querySelectorAll('#tips, #things-to-do, #eat-drink');
+        var quickLinks = document.querySelectorAll('.travel-quicknav a');
+        function updateQuickNav() {
+            var scrollPos = window.scrollY + 160;
+            sections.forEach(function(section) {
+                if (section.offsetTop <= scrollPos && (section.offsetTop + section.offsetHeight) > scrollPos) {
+                    quickLinks.forEach(function(link) {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + section.id);
+                    });
+                }
+            });
+        }
+        window.addEventListener('scroll', updateQuickNav, { passive: true });
+        updateQuickNav();
+    </script>
 </body>
 </html>

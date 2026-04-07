@@ -8,250 +8,689 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Home Page Specific Styles -->
+    <!-- Leaflet CSS (local copy for offline support) -->
+    <link rel="stylesheet" href="css/leaflet.css">
+
     <style>
-        .hero-logo {
-            width: 100px;
-            margin: 0 auto 1.5rem;
-            display: block;
-        }
+    /* ============================================================
+       HOME PAGE — WINERY EDITION
+    ============================================================ */
 
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
+    /* ---- HERO (home page overrides only) ---- */
+    .hero {
+        background-image: url('images/Home Page/Picture 1 - Top part.jpg');
+        background-position: center 20%;
+    }
+    /* Winery-toned overlay: deep forest-green bottom-left → wine dark */
+    .hero::before {
+        background: linear-gradient(
+            to top right,
+            rgba(22, 32, 18, 0.88) 0%,
+            rgba(32, 44, 28, 0.55) 38%,
+            rgba(46, 18, 28, 0.22) 70%,
+            rgba(22, 14, 10, 0.04) 100%
+        );
+    }
 
-        .btn-outline-white {
-            display: inline-block;
-            font-family: var(--font-body);
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            padding: 0.85rem 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            color: #fff;
-            border-radius: 4px;
-            transition: all 0.3s;
-            text-decoration: none;
-            cursor: pointer;
-            background: none;
-        }
+    .btn-outline-white {
+        display: inline-block;
+        font-family: var(--font-body);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        padding: 0.8rem 2rem;
+        border: 1px solid rgba(255,255,255,0.55);
+        color: #fff;
+        border-radius: 2px;
+        transition: all 0.35s;
+        text-decoration: none;
+        cursor: pointer;
+        background: rgba(255,255,255,0.07);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+    .btn-outline-white:hover {
+        background: rgba(255,255,255,0.2);
+        border-color: rgba(255,255,255,0.9);
+        color: #fff;
+    }
 
-        .btn-outline-white:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-        }
+
+    /* ---- SECTION 2: INVITATION (elegant typographic panel) ---- */
+    .invitation-section {
+        background-color: var(--forest);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cpath d='M30 240 Q75 180 120 210 Q165 240 210 165 Q240 112 270 135' stroke='rgba(255,255,255,0.025)' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Cellipse cx='120' cy='195' rx='20' ry='13' transform='rotate(-30 120 195)' fill='rgba(255,255,255,0.02)'/%3E%3Cellipse cx='210' cy='160' rx='20' ry='13' transform='rotate(-55 210 160)' fill='rgba(255,255,255,0.02)'/%3E%3C/svg%3E");
+        background-size: 300px 300px;
+        padding: 6rem 2rem;
+        text-align: center;
+        color: #fff;
+        position: relative;
+    }
+
+    .invitation-section::before {
+        content: '';
+        position: absolute;
+        top: 2.5rem; left: 4rem; right: 4rem;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+    }
+    .invitation-section::after {
+        content: '';
+        position: absolute;
+        bottom: 2.5rem; left: 4rem; right: 4rem;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+    }
+
+    .invitation-inner {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .invitation-lead {
+        font-family: var(--font-body);
+        font-size: 0.72rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.55);
+        margin-bottom: 2.2rem;
+        line-height: 2;
+    }
+
+    .invitation-names {
+        font-family: var(--font-script);
+        font-size: clamp(3.5rem, 8vw, 5.5rem);
+        color: #fff;
+        line-height: 1.1;
+        text-shadow: 0 2px 30px rgba(0,0,0,0.25);
+    }
+
+    /* Vine ornament between text and names */
+    .invitation-ornament {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        margin: 1.8rem auto 2rem;
+        max-width: 320px;
+        opacity: 0.45;
+    }
+    .invitation-ornament::before,
+    .invitation-ornament::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: rgba(255,255,255,0.6);
+    }
+    .invitation-ornament svg {
+        width: 22px;
+        flex-shrink: 0;
+    }
+
+
+    /* ---- SECTION 3: VINE SEPARATOR (between sections) ---- */
+    .vine-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        padding: 0.5rem 2rem;
+        background: var(--warm-white);
+    }
+    .vine-divider::before,
+    .vine-divider::after {
+        content: '';
+        flex: 1;
+        max-width: 200px;
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--border-light));
+    }
+    .vine-divider::after {
+        background: linear-gradient(to left, transparent, var(--border-light));
+    }
+    .vine-divider svg {
+        width: 48px;
+        flex-shrink: 0;
+        opacity: 0.55;
+    }
+
+
+    /* ---- SECTION 3: INFO CARDS ---- */
+    .info-cards-section {
+        background: var(--warm-white);
+        padding: 3rem 2rem 5rem;
+    }
+
+    .info-cards {
+        display: flex;
+        gap: 0;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 0;
+        border: 1px solid var(--border-light);
+        max-width: 860px;
+        margin: 0 auto;
+    }
+
+    .info-card {
+        text-align: center;
+        padding: 3rem 2.5rem;
+        min-width: 240px;
+        flex: 1;
+        border-right: 1px solid var(--border-light);
+        position: relative;
+    }
+    .info-card:last-child { border-right: none; }
+
+    .info-card .card-icon {
+        width: 36px;
+        height: 36px;
+        margin: 0 auto 1.3rem;
+        opacity: 0.6;
+    }
+
+    .info-card .card-label {
+        font-family: var(--font-body);
+        font-size: 0.68rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 0.7rem;
+    }
+
+    .info-card .card-value {
+        font-family: var(--font-heading);
+        font-size: 2rem;
+        color: var(--text-dark);
+        line-height: 1.25;
+        font-weight: 400;
+    }
+
+    .info-card .card-sub {
+        font-family: var(--font-body);
+        font-size: 0.78rem;
+        color: var(--text-light);
+        margin-top: 0.3rem;
+    }
+
+    /* Sleek pill location button */
+    .card-place-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-family: var(--font-body);
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--wine);
+        background: transparent;
+        border: 1px solid rgba(107,45,62,0.3);
+        border-radius: 50px;
+        padding: 0.5rem 1.1rem 0.5rem 0.85rem;
+        margin-top: 1rem;
+        transition: background 0.25s, border-color 0.25s, color 0.25s;
+        text-decoration: none;
+    }
+    .card-place-btn svg {
+        width: 12px;
+        height: 12px;
+        flex-shrink: 0;
+    }
+    .card-place-btn:hover {
+        background: var(--wine);
+        border-color: var(--wine);
+        color: #fff;
+    }
+    .card-place-btn:hover svg path { stroke: #fff; }
+
+
+    /* ---- MAPS SECTION ---- */
+    .maps-section {
+        background: var(--parchment);
+        background-image:
+            repeating-linear-gradient(45deg,  rgba(0,0,0,0.01) 0, rgba(0,0,0,0.01) 1px, transparent 0, transparent 50%),
+            repeating-linear-gradient(-45deg, rgba(0,0,0,0.01) 0, rgba(0,0,0,0.01) 1px, transparent 0, transparent 50%);
+        background-size: 8px 8px;
+        padding: 4rem 2rem;
+    }
+
+    .maps-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .map-card {
+        background: #fff;
+        box-shadow:
+            0 0 0 1px rgba(107,45,62,0.12),
+            0 4px 24px rgba(0,0,0,0.06);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .map-card-label {
+        padding: 1.5rem 1.8rem 1.2rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .map-card-tag {
+        display: inline-block;
+        font-family: var(--font-body);
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--wine);
+        background: rgba(107,45,62,0.07);
+        border-radius: 50px;
+        padding: 0.25rem 0.75rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .map-card-title {
+        font-family: var(--font-heading);
+        font-size: 1.4rem;
+        color: var(--text-dark);
+        font-style: italic;
+        margin-bottom: 0.2rem;
+    }
+
+    .map-card-sub {
+        font-family: var(--font-body);
+        font-size: 0.73rem;
+        color: var(--text-light);
+        letter-spacing: 0.06em;
+    }
+
+    .map-embed {
+        height: 300px;
+        position: relative;
+        overflow: hidden;
+        flex: 1;
+        /* Override default Leaflet link colour to match site theme */
+    }
+
+    /* Leaflet attribution link colour */
+    .map-embed .leaflet-control-attribution a {
+        color: var(--wine) !important;
+    }
+
+    .map-card-btn {
+        display: block;
+        text-align: center;
+        font-family: var(--font-body);
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--wine);
+        padding: 0.9rem 1.5rem;
+        border-top: 1px solid var(--border-light);
+        transition: background 0.25s, color 0.25s;
+        text-decoration: none;
+    }
+
+    .map-card-btn:hover {
+        background: var(--wine);
+        color: #fff;
+    }
+
+    @media (max-width: 768px) {
+        .maps-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+        .map-embed { height: 240px; }
+        .maps-section { padding: 3rem 1.5rem; }
+    }
+
+
+    /* ---- SECTION 4: ITINERARY (winery cellar feel) ---- */
+    .itinerary-section {
+        background-color: var(--forest);
+        /* Repeating vine-leaf tile — very subtle */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M20 160 Q50 120 80 140 Q110 160 140 110 Q160 75 180 90' stroke='rgba(255,255,255,0.04)' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3Cellipse cx='80' cy='130' rx='14' ry='9' transform='rotate(-30 80 130)' fill='rgba(255,255,255,0.03)'/%3E%3Cellipse cx='140' cy='108' rx='14' ry='9' transform='rotate(-55 140 108)' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='100' cy='155' r='4' fill='rgba(107,45,62,0.15)'/%3E%3Ccircle cx='108' cy='162' r='4' fill='rgba(107,45,62,0.15)'/%3E%3Ccircle cx='92' cy='162' r='4' fill='rgba(107,45,62,0.15)'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
+        padding: 5rem 2rem;
+        position: relative;
+    }
+
+    /* Thin top/bottom border inside the section */
+    .itinerary-section::before {
+        content: '';
+        position: absolute;
+        top: 2rem; left: 3rem; right: 3rem;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
+    }
+    .itinerary-section::after {
+        content: '';
+        position: absolute;
+        bottom: 2rem; left: 3rem; right: 3rem;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
+    }
+
+    /* Section heading styled like a winery program title */
+    .itinerary-heading {
+        font-family: var(--font-heading);
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.88);
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    .itinerary-subheading {
+        font-family: var(--font-body);
+        font-size: 0.68rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: rgba(232,213,217,0.55);
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    /* Timeline */
+    .itinerary-timeline {
+        position: relative;
+        max-width: 780px;
+        margin: 0 auto;
+    }
+    .itinerary-timeline::before {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.18) 8%, rgba(255,255,255,0.18) 92%, transparent);
+    }
+
+    .timeline-row {
+        display: grid;
+        grid-template-columns: 1fr 52px 1fr;
+        align-items: center;
+        margin-bottom: 2.8rem;
+    }
+    .timeline-left  { text-align: right; padding-right: 2rem; }
+    .timeline-right { text-align: left;  padding-left:  2rem; }
+
+    .timeline-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+        z-index: 2;
+    }
+    .timeline-dot {
+        width: 9px; height: 9px;
+        border-radius: 50%;
+        background: var(--wine-light);
+        border: 2px solid rgba(255,255,255,0.2);
+        box-shadow: 0 0 0 2px rgba(107,45,62,0.4);
+        flex-shrink: 0;
+    }
+    .timeline-icon {
+        width: 32px; height: 32px;
+        object-fit: contain;
+        opacity: 0.45;
+        filter: brightness(0) invert(1);
+    }
+
+    .timeline-time {
+        font-family: var(--font-body);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        color: rgba(232,213,217,0.75);
+        text-transform: uppercase;
+        margin-bottom: 0.2rem;
+    }
+    .timeline-label {
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.88);
+        font-style: italic;
+    }
+
+
+    /* ---- SECTION 5: VENUE ---- */
+    .venue-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 520px;
+    }
+    .venue-img {
+        background: url('images/Home Page/winery.webp') center/cover no-repeat;
+        min-height: 420px;
+        position: relative;
+    }
+    /* Subtle wine-toned edge vignette on venue photo */
+    .venue-img::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right, transparent 75%, rgba(250,248,245,0.5));
+    }
+    .venue-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4rem 3.5rem;
+        background: var(--parchment);
+        background-image:
+            repeating-linear-gradient(45deg,  rgba(0,0,0,0.01) 0, rgba(0,0,0,0.01) 1px, transparent 0, transparent 50%),
+            repeating-linear-gradient(-45deg, rgba(0,0,0,0.01) 0, rgba(0,0,0,0.01) 1px, transparent 0, transparent 50%);
+        background-size: 8px 8px;
+    }
+    .venue-info h2 {
+        font-family: var(--font-body);
+        font-size: 0.68rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--wine);
+        margin-bottom: 1rem;
+    }
+    .venue-info h3 {
+        font-family: var(--font-heading);
+        font-size: 2.5rem;
+        margin-bottom: 0.4rem;
+        color: var(--text-dark);
+        font-style: italic;
+    }
+    .venue-info p {
+        color: var(--text-light);
+        margin-bottom: 2rem;
+        letter-spacing: 0.08em;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+    }
+    .btn-directions {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-body);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        padding: 0.9rem 2.2rem;
+        border: 1px solid var(--wine);
+        color: var(--wine);
+        border-radius: 2px;
+        transition: all 0.3s;
+        text-decoration: none;
+        cursor: pointer;
+        width: fit-content;
+    }
+    .btn-directions:hover {
+        background: var(--wine);
+        color: #fff;
+    }
+    .btn-directions-outline {
+        background: transparent;
+        color: var(--sage-dark);
+        border-color: var(--sage);
+    }
+    .btn-directions-outline:hover {
+        background: var(--sage-dark);
+        border-color: var(--sage-dark);
+        color: #fff;
+    }
+
+
+    /* ---- PHOTO STRIP ---- */
+    .photo-strip {
+        height: 440px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .photo-strip::before {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(32,44,28,0.3) 0%,
+            rgba(46,18,28,0.55) 100%
+        );
+    }
+    .photo-strip-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 0 2rem;
+    }
+    .photo-strip-text {
+        color: #fff;
+        font-family: var(--font-script);
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+        text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+        line-height: 1.3;
+    }
+    .photo-strip-sub {
+        font-family: var(--font-body);
+        font-size: 0.68rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.65);
+        margin-top: 1rem;
+    }
+
+
+    /* ---- FOOTER ---- */
+    .site-footer {
+        background: var(--forest);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M20 160 Q50 120 80 140 Q110 160 140 110 Q160 75 180 90' stroke='rgba(255,255,255,0.03)' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
+        color: rgba(255,255,255,0.85);
+        text-align: center;
+        padding: 4.5rem 2rem 3.5rem;
+    }
+    .footer-script {
+        font-family: var(--font-script);
+        font-size: 2.8rem;
+        color: #fff;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+    .footer-ornament {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin: 1rem auto;
+        max-width: 200px;
+    }
+    .footer-ornament::before,
+    .footer-ornament::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: rgba(255,255,255,0.25);
+    }
+    .footer-ornament svg {
+        width: 22px;
+        opacity: 0.5;
+    }
+    .footer-date {
+        font-family: var(--font-body);
+        font-size: 0.68rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.4);
+        margin-top: 0.5rem;
+    }
+
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+        .venue-section { grid-template-columns: 1fr; }
+        .venue-img { min-height: 280px; }
+        .venue-img::after { background: linear-gradient(to bottom, transparent 80%, rgba(250,248,245,0.5)); }
+        .venue-info { padding: 2.5rem 1.5rem; }
+
+        .photo-strip { height: 280px; }
 
         .info-cards {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .info-card {
-            text-align: center;
-            padding: 2rem;
-            min-width: 200px;
-        }
-
-        .info-card .card-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 1rem;
-        }
-
-        .info-card .card-label {
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .info-card .card-value {
-            font-family: var(--font-heading);
-            font-size: 1.4rem;
-            color: var(--text-dark);
-        }
-
-        .itinerary-list {
-            list-style: none;
-            max-width: 500px;
-            margin: 2rem auto 0;
-            padding: 0;
-        }
-
-        .itinerary-item {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1.2rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .itinerary-item:last-child {
-            border-bottom: none;
-        }
-
-        .itinerary-time {
-            font-size: 0.85rem;
-            letter-spacing: 0.1em;
-            min-width: 70px;
-            font-weight: 600;
-            opacity: 0.9;
-        }
-
-        .itinerary-icon {
-            width: 28px;
-            height: 28px;
-            flex-shrink: 0;
-            filter: brightness(0) invert(1);
-            opacity: 0.8;
-        }
-
-        .itinerary-name {
-            font-family: var(--font-heading);
-            font-size: 1.1rem;
-            letter-spacing: 0.05em;
-        }
-
-        .venue-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 500px;
-        }
-
-        .venue-img {
-            background: url('images/Home Page/Picture 3 - the venue.jpg') center/cover no-repeat;
-            min-height: 400px;
-        }
-
-        .venue-info {
-            display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding: 4rem 3rem;
-            background: var(--cream);
+            border: none;
+            gap: 0;
         }
-
-        .venue-info h2 {
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 1rem;
+        .info-card {
+            border-right: none;
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 1.5rem;
         }
+        .info-card:last-child { border-bottom: none; }
 
-        .venue-info h3 {
-            font-family: var(--font-heading);
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
+        .invitation-section { padding: 4rem 1.5rem; }
+        .invitation-section::before,
+        .invitation-section::after { left: 1.5rem; right: 1.5rem; }
 
-        .venue-info p {
-            color: var(--text-medium);
-            margin-bottom: 2rem;
-            letter-spacing: 0.05em;
-        }
-
-        .btn-directions {
-            display: inline-block;
-            font-family: var(--font-body);
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            padding: 0.85rem 2.5rem;
-            border: 1px solid var(--sage);
-            color: var(--sage);
-            border-radius: 4px;
-            transition: all 0.3s;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .btn-directions:hover {
-            background: var(--sage);
-            color: #fff;
-        }
-
-        .photo-strip {
-            height: 400px;
-            background: url('images/Home Page/Picture 2 - where when time.jpg') center/cover no-repeat;
-            position: relative;
+        /* Timeline stacks left on mobile */
+        .itinerary-timeline::before { left: 26px; transform: none; }
+        .timeline-row {
             display: flex;
             align-items: center;
-            justify-content: center;
+            margin-bottom: 2rem;
         }
+        .timeline-center { order: 1; flex-shrink: 0; width: 52px; }
+        .timeline-left,
+        .timeline-right { order: 2; text-align: left; padding-left: 1rem; padding-right: 0; }
+        .timeline-empty { display: none; }
 
-        .photo-strip::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.4);
-        }
+        .itinerary-section::before,
+        .itinerary-section::after { left: 1.5rem; right: 1.5rem; }
+    }
 
-        .photo-strip-text {
-            position: relative;
-            z-index: 2;
-            color: #fff;
-            font-family: var(--font-script);
-            font-size: 3rem;
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            .venue-section {
-                grid-template-columns: 1fr;
-            }
-
-            .venue-img {
-                min-height: 300px;
-            }
-
-            .venue-info {
-                padding: 2.5rem 1.5rem;
-            }
-
-            .photo-strip {
-                height: 250px;
-            }
-
-            .photo-strip-text {
-                font-size: 2rem;
-            }
-
-            .info-cards {
-                gap: 1rem;
-            }
-
-            .info-card {
-                padding: 1.5rem;
-                min-width: 150px;
-            }
-        }
+    @media (max-width: 480px) {
+        .photo-strip { height: 220px; }
+        .photo-strip-text { font-size: 2rem; }
+    }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="site-nav">
+    <nav class="site-nav" id="site-nav">
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </button>
         <ul class="nav-links">
             <li><a href="index.html">Welcome</a></li>
@@ -263,130 +702,370 @@
     </nav>
 
     <main>
-        <!-- SECTION 1: Hero Section -->
-        <section class="hero" style="background-image: url('images/Home Page/Picture 1 - Top part.jpg');">
+
+        <!-- ==================== SECTION 1: HERO ==================== -->
+        <section class="hero">
             <div class="hero-content">
-                <img src="images/C_N Logo SVG - Web Transparent.svg" alt="Nicolas & Cecilia" class="hero-logo">
+                <span class="hero-page-label">Wedding Invitation</span>
                 <h1 class="script-heading">Nicolas &amp; Cecilia</h1>
-                <p class="hero-subtitle">Saturday, 22 February 2025</p>
+                <div class="hero-accent-block">
+                    <div class="hero-accent-line"></div>
+                    <div class="hero-subtitle-block">
+                        <p>18 September &nbsp;·&nbsp; Lebanon</p>
+                        <p>Join us as we celebrate our love</p>
+                    </div>
+                </div>
                 <div class="hero-cta">
                     <a href="rsvp.html" class="btn-outline-white">RSVP</a>
                     <a href="registry.html" class="btn-outline-white">Our Registry</a>
+                    <a href="#wedding-details" class="btn-outline-white">Wedding Details</a>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: Wedding Invitation -->
-        <section class="section section-cream">
+
+        <!-- ==================== SECTION 2: INVITATION ==================== -->
+        <section class="invitation-section">
+            <div class="invitation-inner fade-in">
+
+                <p class="invitation-lead">You are cordially invited<br>to celebrate the marriage of</p>
+
+                <!-- Vine ornament divider -->
+                <div class="invitation-ornament">
+                    <svg viewBox="0 0 80 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+                        <path d="M5 12 Q20 4 40 12 Q60 20 75 12" stroke="rgba(255,255,255,0.7)" stroke-width="1.4" stroke-linecap="round"/>
+                        <ellipse cx="26" cy="8" rx="6" ry="4" transform="rotate(-20 26 8)" fill="rgba(255,255,255,0.25)"/>
+                        <ellipse cx="54" cy="16" rx="6" ry="4" transform="rotate(20 54 16)" fill="rgba(255,255,255,0.25)"/>
+                    </svg>
+                </div>
+
+                <p class="invitation-names">Nicolas &amp; Cecilia</p>
+
+            </div>
+        </section>
+
+
+        <!-- Vine divider between sections -->
+        <div class="vine-divider" style="background:var(--warm-white); padding: 1.5rem 2rem;">
+            <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" fill="none" style="width:80px;opacity:0.45;">
+                <path d="M5 20 Q20 8 35 20 Q50 32 65 20 Q80 8 95 20 Q108 30 115 20" stroke="#3d5c38" stroke-width="1.8" stroke-linecap="round"/>
+                <ellipse cx="35" cy="14" rx="7" ry="4.5" transform="rotate(-20 35 14)" fill="#3d5c38"/>
+                <ellipse cx="65" cy="26" rx="7" ry="4.5" transform="rotate(20 65 26)" fill="#3d5c38"/>
+                <circle cx="50" cy="36" r="3.5" fill="#6b2d3e"/>
+                <circle cx="57" cy="31" r="3.5" fill="#6b2d3e"/>
+                <circle cx="43" cy="31" r="3.5" fill="#6b2d3e"/>
+            </svg>
+        </div>
+
+
+        <!-- ==================== SECTION 3: DATE / CEREMONY / DINNER ==================== -->
+        <section class="info-cards-section" id="wedding-details">
+            <div class="info-cards">
+
+                <!-- Date & Location -->
+                <div class="info-card">
+                    <img src="images/Rings.svg" alt="Date" class="card-icon">
+                    <p class="card-label">Date &amp; Location</p>
+                    <p class="card-value">18 September</p>
+                    <p class="card-sub">Lebanon</p>
+                </div>
+
+                <!-- Ceremony -->
+                <div class="info-card">
+                    <img src="images/Welcome.svg" alt="Ceremony" class="card-icon">
+                    <p class="card-label">Ceremony</p>
+                    <p class="card-value">4:30 PM</p>
+                    <a href="https://maps.app.goo.gl/B5763VcUenxgmd44A" target="_blank" class="card-place-btn">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        St Maroun Church — Beirut
+                    </a>
+                </div>
+
+                <!-- Cocktail & Dinner -->
+                <div class="info-card">
+                    <img src="images/Dinner.svg" alt="Dinner" class="card-icon">
+                    <p class="card-label">Cocktail &amp; Dinner</p>
+                    <p class="card-value">6:30 PM</p>
+                    <a href="https://maps.app.goo.gl/fbhv8z9wLBR5VeKf6" target="_blank" class="card-place-btn">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Ixsir Winery
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== SECTION 3b: MAPS ==================== -->
+        <section class="maps-section">
+            <div class="maps-grid">
+
+                <!-- Church map -->
+                <div class="map-card">
+                    <div class="map-card-label">
+                        <span class="map-card-tag">Ceremony</span>
+                        <h3 class="map-card-title">St Maroun Church</h3>
+                        <p class="map-card-sub">Beirut, Lebanon</p>
+                    </div>
+                    <div class="map-embed" id="map-church" style="height:300px;width:100%;"></div>
+                    <a href="https://maps.app.goo.gl/B5763VcUenxgmd44A" target="_blank" class="map-card-btn">Open in Google Maps</a>
+                </div>
+
+                <!-- Winery map -->
+                <div class="map-card">
+                    <div class="map-card-label">
+                        <span class="map-card-tag">Cocktail &amp; Dinner</span>
+                        <h3 class="map-card-title">Ixsir Winery</h3>
+                        <p class="map-card-sub">Lebanon</p>
+                    </div>
+                    <div class="map-embed" id="map-winery" style="height:300px;width:100%;"></div>
+                    <a href="https://maps.app.goo.gl/fbhv8z9wLBR5VeKf6" target="_blank" class="map-card-btn">Open in Google Maps</a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== SECTION 4: ITINERARY ==================== -->
+        <section class="itinerary-section">
             <div class="section-content">
-                <div style="text-align: center; font-family: var(--font-heading); color: var(--text-dark); line-height: 1.8;">
-                    <p style="font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-light); margin-bottom: 2rem;">Request the honour of your presence at the wedding of</p>
-                    <p style="font-size: 1.1rem; letter-spacing: 0.1em; margin-bottom: 2rem;">
-                        ELIE MALHA <span style="display: block; margin-top: 0.5rem;"></span>
-                        &amp;
-                        <span style="display: block; margin-top: 0.5rem;"></span>
-                        GHADA KHOURY
-                    </p>
-                    <p style="font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-light); margin-bottom: 2rem;">at the wedding of their son and daughter</p>
-                    <p style="font-family: var(--font-script); font-size: 2.5rem; font-style: italic; color: var(--text-dark);">Nicolas &amp; Cecilia</p>
+                <h2 class="itinerary-heading">The Itinerary</h2>
+                <p class="itinerary-subheading">18 September &nbsp;·&nbsp; Lebanon</p>
+
+                <div class="itinerary-timeline">
+
+                    <!-- Ceremony — LEFT -->
+                    <div class="timeline-row left-item">
+                        <div class="timeline-left">
+                            <p class="timeline-time">4:30 PM</p>
+                            <p class="timeline-label">Ceremony</p>
+                        </div>
+                        <div class="timeline-center">
+                            <div class="timeline-dot"></div>
+                            <img src="images/Rings.svg" alt="" class="timeline-icon">
+                        </div>
+                        <div class="timeline-empty"></div>
+                    </div>
+
+                    <!-- Cocktail & Photos — RIGHT -->
+                    <div class="timeline-row right-item">
+                        <div class="timeline-empty"></div>
+                        <div class="timeline-center">
+                            <div class="timeline-dot"></div>
+                            <img src="images/Camera.svg" alt="" class="timeline-icon">
+                        </div>
+                        <div class="timeline-right">
+                            <p class="timeline-time">6:00 PM</p>
+                            <p class="timeline-label">Cocktail &amp; Photos</p>
+                        </div>
+                    </div>
+
+                    <!-- Welcome Toasts — LEFT -->
+                    <div class="timeline-row left-item">
+                        <div class="timeline-left">
+                            <p class="timeline-time">7:30 PM</p>
+                            <p class="timeline-label">Welcome Toasts</p>
+                        </div>
+                        <div class="timeline-center">
+                            <div class="timeline-dot"></div>
+                            <img src="images/Toast.svg" alt="" class="timeline-icon">
+                        </div>
+                        <div class="timeline-empty"></div>
+                    </div>
+
+                    <!-- Dinner — RIGHT -->
+                    <div class="timeline-row right-item">
+                        <div class="timeline-empty"></div>
+                        <div class="timeline-center">
+                            <div class="timeline-dot"></div>
+                            <img src="images/Dinner.svg" alt="" class="timeline-icon">
+                        </div>
+                        <div class="timeline-right">
+                            <p class="timeline-time">8:00 PM</p>
+                            <p class="timeline-label">Dinner</p>
+                        </div>
+                    </div>
+
+                    <!-- Dance — LEFT -->
+                    <div class="timeline-row left-item">
+                        <div class="timeline-left">
+                            <p class="timeline-time">9:30 PM</p>
+                            <p class="timeline-label">Dance</p>
+                        </div>
+                        <div class="timeline-center">
+                            <div class="timeline-dot"></div>
+                            <img src="images/Music.svg" alt="" class="timeline-icon">
+                        </div>
+                        <div class="timeline-empty"></div>
+                    </div>
+
+                    <!-- Cake Cutting — RIGHT -->
+                    <div class="timeline-row right-item">
+                        <div class="timeline-empty"></div>
+                        <div class="timeline-center">
+                            <div class="timeline-dot"></div>
+                            <img src="images/Cake.svg" alt="" class="timeline-icon">
+                        </div>
+                        <div class="timeline-right">
+                            <p class="timeline-time">10:30 PM</p>
+                            <p class="timeline-label">Cake Cutting</p>
+                        </div>
+                    </div>
+
+                    <!-- Grand Exit — LEFT -->
+                    <div class="timeline-row left-item">
+                        <div class="timeline-left">
+                            <p class="timeline-time">12:00 AM</p>
+                            <p class="timeline-label">Grand Exit</p>
+                        </div>
+                        <div class="timeline-center">
+                            <div class="timeline-dot"></div>
+                            <img src="images/Welcome.svg" alt="" class="timeline-icon">
+                        </div>
+                        <div class="timeline-empty"></div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 3: Date / Time / Venue Info Cards -->
-        <section class="section section-white">
-            <div class="section-content">
-                <div class="info-cards">
-                    <!-- Date Card -->
-                    <div class="info-card">
-                        <img src="images/Rings.svg" alt="Date" class="card-icon">
-                        <p class="card-label">Date</p>
-                        <p class="card-value">22 February 2025</p>
-                    </div>
 
-                    <!-- Time Card -->
-                    <div class="info-card">
-                        <div class="card-icon" style="display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">⏰</div>
-                        <p class="card-label">Time</p>
-                        <p class="card-value">5:00 PM</p>
-                    </div>
-
-                    <!-- Venue Card -->
-                    <div class="info-card">
-                        <div class="card-icon" style="display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">📍</div>
-                        <p class="card-label">Venue</p>
-                        <p class="card-value">Address Montgomerie<br style="display: none;"><span style="font-size: 0.85rem;">Dubai, UAE</span></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4: The Itinerary -->
-        <section class="section section-sage">
-            <div class="section-content">
-                <h2 class="section-heading" style="color: #fff; text-align: center; margin-bottom: 2rem;">The Itinerary</h2>
-                <ul class="itinerary-list" style="color: #fff;">
-                    <li class="itinerary-item">
-                        <span class="itinerary-time">5:00 PM</span>
-                        <img src="images/Welcome.svg" alt="" class="itinerary-icon">
-                        <span class="itinerary-name">Guest Arrival</span>
-                    </li>
-                    <li class="itinerary-item">
-                        <span class="itinerary-time">5:30 PM</span>
-                        <img src="images/Rings.svg" alt="" class="itinerary-icon">
-                        <span class="itinerary-name">Wedding Ceremony</span>
-                    </li>
-                    <li class="itinerary-item">
-                        <span class="itinerary-time">6:00 PM</span>
-                        <img src="images/Toast.svg" alt="" class="itinerary-icon">
-                        <span class="itinerary-name">Cocktail Hour &amp; Photographs</span>
-                    </li>
-                    <li class="itinerary-item">
-                        <span class="itinerary-time">7:30 PM</span>
-                        <img src="images/Dinner.svg" alt="" class="itinerary-icon">
-                        <span class="itinerary-name">Dinner &amp; Toasts</span>
-                    </li>
-                    <li class="itinerary-item">
-                        <span class="itinerary-time">10:30 PM</span>
-                        <img src="images/Cake.svg" alt="" class="itinerary-icon">
-                        <span class="itinerary-name">Cake Cutting</span>
-                    </li>
-                    <li class="itinerary-item">
-                        <span class="itinerary-time">11:00 PM</span>
-                        <img src="images/Music.svg" alt="" class="itinerary-icon">
-                        <span class="itinerary-name">Indoor Afterparty</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- SECTION 5: The Venue -->
-        <section class="section section-white">
+        <!-- ==================== SECTION 5: VENUE ==================== -->
+        <section class="section section-white" style="padding:0;">
             <div class="venue-section">
                 <div class="venue-img"></div>
                 <div class="venue-info">
                     <h2>The Venue</h2>
-                    <h3>Address Montgomerie</h3>
-                    <p>Dubai — United Arab Emirates</p>
-                    <a href="https://maps.google.com/?q=Address+Montgomerie+Dubai" class="btn-directions" target="_blank">Get Directions</a>
+                    <h3>Ixsir Winery</h3>
+                    <p>Lebanon</p>
+                    <div style="display:flex; flex-direction:column; gap:0.75rem; align-items:flex-start;">
+                        <a href="https://maps.app.goo.gl/fbhv8z9wLBR5VeKf6" class="btn-directions" target="_blank">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;flex-shrink:0;">
+                                <path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Get Directions
+                        </a>
+                        <a href="travel.html" class="btn-directions btn-directions-outline">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;flex-shrink:0;">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M9 9l6-4-2 5 5-1-7 5 1-5-4 1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            First time visiting Lebanon?
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 6: Photo Strip with Tagline -->
-        <section class="photo-strip">
-            <p class="photo-strip-text">Join us as we celebrate our love</p>
+
+        <!-- ==================== SECTION 6: PHOTO STRIP ==================== -->
+        <section class="photo-strip" style="background-image: url('images/Home Page/lebanon-sunset-mountains-scenery-sunsets-sunset-6-3-2019-10-53-29-pm-m.jpg');">
+            <div class="photo-strip-content">
+                <p class="photo-strip-text">Join us as we celebrate our love</p>
+            </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
+
+    <!-- ==================== FOOTER ==================== -->
     <footer class="site-footer">
-        <p class="footer-title">NICOLAS AND CECILIA</p>
-        <p class="footer-copy">&copy; 2025 by Nicolas and Cecilia</p>
+        <p class="footer-script">Nicolas &amp; Cecilia</p>
+        <div class="footer-ornament">
+            <!-- Small grape cluster ornament -->
+            <svg viewBox="0 0 50 60" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="25" cy="18" rx="7" ry="7.5" fill="rgba(232,213,217,0.5)"/>
+                <ellipse cx="17" cy="30" rx="7" ry="7.5" fill="rgba(232,213,217,0.45)"/>
+                <ellipse cx="33" cy="30" rx="7" ry="7.5" fill="rgba(232,213,217,0.45)"/>
+                <ellipse cx="25" cy="42" rx="7" ry="7.5" fill="rgba(232,213,217,0.38)"/>
+                <path d="M25 10 Q30 4 36 2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <p class="footer-date">18 September &nbsp;·&nbsp; Lebanon</p>
     </footer>
+
+
+    <!-- Leaflet JS (local copy for offline support) -->
+    <script src="js/leaflet.js"></script>
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
+    <script>
+        // Transparent nav → solid on scroll
+        const nav = document.getElementById('site-nav');
+        function updateNav() {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        }
+        window.addEventListener('scroll', updateNav, { passive: true });
+        updateNav();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ---- LEAFLET MAPS ----
+        // Safe init: works whether DOMContentLoaded has fired or not
+        function initMaps() {
+            if (typeof L === 'undefined') return; // Leaflet not loaded yet
+
+            // Tile layer: CartoDB Positron — clean, minimal, no API key needed
+            var tileUrl    = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+            var tileAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
+
+            // Custom wine-red teardrop marker
+            function wineMarker() {
+                return L.divIcon({
+                    className: '',
+                    html: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 28 40"><path d="M14 0C6.27 0 0 6.27 0 14c0 9.75 14 26 14 26S28 23.75 28 14C28 6.27 21.73 0 14 0z" fill="#6b2d3e"/><circle cx="14" cy="14" r="6" fill="rgba(255,255,255,0.4)"/></svg>',
+                    iconSize:    [28, 40],
+                    iconAnchor:  [14, 40],
+                    popupAnchor: [0, -42]
+                });
+            }
+
+            // Map 1: St Maroun Church, Gemmayzeh, Beirut
+            if (document.getElementById('map-church') && !document.getElementById('map-church')._leaflet_id) {
+                var mapChurch = L.map('map-church', { scrollWheelZoom: false });
+                L.tileLayer(tileUrl, { attribution: tileAttrib, maxZoom: 19 }).addTo(mapChurch);
+                mapChurch.setView([33.8934, 35.5195], 15);
+                L.marker([33.8934, 35.5195], { icon: wineMarker() })
+                    .addTo(mapChurch)
+                    .bindPopup('<b>St Maroun Church</b><br>Gemmayzeh, Beirut');
+                setTimeout(function () { mapChurch.invalidateSize(); }, 300);
+            }
+
+            // Map 2: Ixsir Winery, Batroun, Lebanon
+            if (document.getElementById('map-winery') && !document.getElementById('map-winery')._leaflet_id) {
+                var mapWinery = L.map('map-winery', { scrollWheelZoom: false });
+                L.tileLayer(tileUrl, { attribution: tileAttrib, maxZoom: 19 }).addTo(mapWinery);
+                mapWinery.setView([34.2545, 35.6658], 14);
+                L.marker([34.2545, 35.6658], { icon: wineMarker() })
+                    .addTo(mapWinery)
+                    .bindPopup('<b>Ixsir Winery</b><br>Batroun, Lebanon');
+                setTimeout(function () { mapWinery.invalidateSize(); }, 300);
+            }
+        }
+
+        // Run immediately (script is at bottom of body, DOM is ready)
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMaps);
+        } else {
+            initMaps();
+        }
+    </script>
 </body>
 </html>

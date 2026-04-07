@@ -15,7 +15,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="site-nav">
+    <nav class="site-nav" id="site-nav">
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
             <span></span>
             <span></span>
@@ -23,7 +23,7 @@
         </button>
         <ul class="nav-links">
             <li><a href="index.html">Welcome</a></li>
-            <li><a href="our-story.html">Our Story</a></li>
+            <li><a href="our-story.html" class="active">Our Story</a></li>
             <li><a href="travel.html">Travel &amp; Accommodation</a></li>
             <li><a href="registry.html">Our Registry</a></li>
             <li><a href="rsvp.html">RSVP</a></li>
@@ -33,11 +33,17 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="hero hero-short">
-            <div class="hero-bg" style="background-image: url('images/Our Story/Photo Top part - high quality - requires editing.PNG');"></div>
+        <section class="hero hero-short" style="background-image: url('images/Our Story/Photo Top part - high quality - requires editing.PNG');">
             <div class="hero-content">
+                <span class="hero-page-label">Our Story</span>
                 <h1 class="script-heading">Nicolas &amp; Cecilia</h1>
-                <p class="subtitle">Saturday, February 22nd 2025</p>
+                <div class="hero-accent-block">
+                    <div class="hero-accent-line"></div>
+                    <div class="hero-subtitle-block">
+                        <p>Paris · 2020 — Lebanon · 2025</p>
+                        <p>How we met, fell in love &amp; found our way here</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -136,11 +142,27 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-        <p class="footer-title">NICOLAS AND CECILIA</p>
-        <p class="footer-copy">&copy; 2025 by Nicolas and Cecilia</p>
+        <p class="footer-script">Nicolas &amp; Cecilia</p>
+        <div class="footer-ornament">
+            <svg viewBox="0 0 50 60" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="25" cy="18" rx="7" ry="7.5" fill="rgba(232,213,217,0.5)"/>
+                <ellipse cx="17" cy="30" rx="7" ry="7.5" fill="rgba(232,213,217,0.45)"/>
+                <ellipse cx="33" cy="30" rx="7" ry="7.5" fill="rgba(232,213,217,0.45)"/>
+                <ellipse cx="25" cy="42" rx="7" ry="7.5" fill="rgba(232,213,217,0.38)"/>
+                <path d="M25 10 Q30 4 36 2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <p class="footer-date">18 September &nbsp;·&nbsp; Lebanon</p>
     </footer>
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
+    <script>
+        // Transparent nav → solid on scroll
+        const nav = document.getElementById('site-nav');
+        function updateNav() { nav.classList.toggle('scrolled', window.scrollY > 80); }
+        window.addEventListener('scroll', updateNav, { passive: true });
+        updateNav();
+    </script>
 </body>
 </html>
