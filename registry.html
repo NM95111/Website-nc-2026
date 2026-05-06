@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Registry | Nicolas &amp; Cecilia</title>
+    <title>Wedding Registry | Nicolas &amp; Cecilia</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,185 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ---- Registry section ---- */
+        .registry-section {
+            background: var(--cream, #faf7f2);
+            padding: 4rem 2rem 5rem;
+        }
+        .registry-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            max-width: 1320px;
+            margin: 0 auto 3rem;
+        }
+
+        /* ---- Card ---- */
+        .registry-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 6px 28px rgba(0,0,0,0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .registry-card-header {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            padding: 1.6rem 1.6rem 1.4rem;
+            min-height: 130px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        /* semi-transparent dark overlay */
+        .registry-card-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(18, 26, 15, 0.52);
+        }
+        .registry-card-header > * {
+            position: relative;
+            z-index: 1;
+        }
+        .registry-card-currency {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: rgba(255,255,255,0.95);
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 5px;
+            padding: 0.22rem 0.6rem;
+            margin-bottom: 0.8rem;
+            width: fit-content;
+        }
+        .registry-card-country {
+            font-family: var(--font-body);
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 0.25rem;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+        }
+        .registry-card-bank {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.02em;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+        }
+
+        /* ---- Field rows ---- */
+        .registry-card-body {
+            padding: 0.4rem 1.6rem 1.2rem;
+            flex: 1;
+        }
+        .registry-field {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .registry-field:last-child {
+            border-bottom: none;
+        }
+        .registry-field-text {
+            flex: 1;
+            min-width: 0;
+        }
+        .registry-label {
+            font-family: var(--font-body);
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-light, #999);
+            display: block;
+            margin-bottom: 0.15rem;
+        }
+        .registry-value {
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            color: var(--text-dark, #222);
+            font-weight: 500;
+            word-break: break-all;
+        }
+
+        /* ---- Copy button ---- */
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border: 1px solid rgba(107,45,62,0.22);
+            border-radius: 7px;
+            background: transparent;
+            color: var(--wine);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+        .copy-btn:hover {
+            background: var(--wine);
+            border-color: var(--wine);
+            color: #fff;
+        }
+        .copy-btn svg {
+            width: 13px;
+            height: 13px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .copy-btn.copied {
+            background: #7a9e6e;
+            border-color: #7a9e6e;
+            color: #fff;
+        }
+
+        /* ---- Closing note ---- */
+        .registry-note-block {
+            text-align: center;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .registry-note-ornament {
+            color: var(--wine);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            opacity: 0.6;
+        }
+        .registry-note-text {
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            color: var(--text-medium, #666);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        @media (max-width: 900px) {
+            .registry-grid { grid-template-columns: 1fr; max-width: 480px; }
+        }
+        @media (max-width: 480px) {
+            .registry-section { padding: 3rem 1.2rem 4rem; }
+            .registry-card-header { padding: 1.3rem 1.3rem 1.1rem; }
+            .registry-card-body { padding: 0.3rem 1.3rem 1rem; }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -23,9 +202,8 @@
         </button>
         <ul class="nav-links">
             <li><a href="index.html">Welcome</a></li>
-            <li><a href="our-story.html">Our Story</a></li>
             <li><a href="travel.html">Travel &amp; Accommodation</a></li>
-            <li><a href="registry.html" class="active">Our Registry</a></li>
+            <li><a href="registry.html" class="active">Wedding Registry</a></li>
             <li><a href="rsvp.html">RSVP</a></li>
         </ul>
     </nav>
@@ -36,12 +214,12 @@
         <section class="hero hero-short" style="background-image: url('images/REGISTRY top photo.jpg');">
             <div class="hero-content">
                 <span class="hero-page-label">For Our Future Together</span>
-                <h1 class="script-heading">Our Registry</h1>
+                <h1 class="script-heading">Wedding Registry</h1>
                 <div class="hero-accent-block">
                     <div class="hero-accent-line"></div>
                     <div class="hero-subtitle-block">
-                        <p>Your presence is our greatest gift</p>
-                        <p>18 September · Lebanon</p>
+                        <p>Your presence is the best gift we could ask for</p>
+                        <p>1 August · Lebanon</p>
                     </div>
                 </div>
             </div>
@@ -56,42 +234,133 @@
             </div>
         </section>
 
-        <!-- Registry Blocks (White) -->
-        <section class="section section-white">
-            <div class="section-inner">
-                <div class="registry-block">
-                    <h3>Lebanon Wish Account</h3>
-                    <p>
-                        Account Name: Nicolas &amp; Cecilia<br>
-                        Account ID: 20755872
-                    </p>
+        <!-- Registry Cards -->
+        <section class="registry-section">
+
+            <div class="registry-grid">
+
+                <!-- Dubai -->
+                <div class="registry-card">
+                    <div class="registry-card-header" style="background-image: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80');">
+                        <span class="registry-card-currency">AED</span>
+                        <p class="registry-card-country">Dubai</p>
+                        <p class="registry-card-bank">Emirates NBD</p>
+                    </div>
+                    <div class="registry-card-body">
+                        <div class="registry-field">
+                            <div class="registry-field-text">
+                                <span class="registry-label">Account holder</span>
+                                <span class="registry-value">Nicolas Malha</span>
+                            </div>
+                            <button class="copy-btn" data-copy="Nicolas Malha" aria-label="Copy account holder">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            </button>
+                        </div>
+                        <div class="registry-field">
+                            <div class="registry-field-text">
+                                <span class="registry-label">IBAN</span>
+                                <span class="registry-value">AE05 0260 0002 1579 8826 601</span>
+                            </div>
+                            <button class="copy-btn" data-copy="AE050260000215798826601" aria-label="Copy IBAN">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            </button>
+                        </div>
+                        <div class="registry-field">
+                            <div class="registry-field-text">
+                                <span class="registry-label">Account number</span>
+                                <span class="registry-value">0215798826601</span>
+                            </div>
+                            <button class="copy-btn" data-copy="0215798826601" aria-label="Copy account number">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="registry-block">
-                    <h3>UAE Bank Account</h3>
-                    <p>
-                        Account holder: Nicolas Malha<br>
-                        IBAN: AE37 0260 0003 1579 8826 602<br>
-                        Account number: 0315798826602<br>
-                        Swift code: EBILAEAD<br>
-                        Routing number: 302620122
-                    </p>
+                <!-- France -->
+                <div class="registry-card">
+                    <div class="registry-card-header" style="background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80'); background-position: center 60%;">
+                        <span class="registry-card-currency">EUR</span>
+                        <p class="registry-card-country">France</p>
+                        <p class="registry-card-bank">BNP Paribas</p>
+                    </div>
+                    <div class="registry-card-body">
+                        <div class="registry-field">
+                            <div class="registry-field-text">
+                                <span class="registry-label">Account holder</span>
+                                <span class="registry-value">Cecilia Anastasia Bouri</span>
+                            </div>
+                            <button class="copy-btn" data-copy="Cecilia Anastasia Bouri" aria-label="Copy account holder">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            </button>
+                        </div>
+                        <div class="registry-field">
+                            <div class="registry-field-text">
+                                <span class="registry-label">IBAN</span>
+                                <span class="registry-value">FR76 3000 4013 9300 0005 9361 880</span>
+                            </div>
+                            <button class="copy-btn" data-copy="FR7630004013930000059361880" aria-label="Copy IBAN">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            </button>
+                        </div>
+                        <div class="registry-field">
+                            <div class="registry-field-text">
+                                <span class="registry-label">Account number</span>
+                                <span class="registry-value">00000593618</span>
+                            </div>
+                            <button class="copy-btn" data-copy="00000593618" aria-label="Copy account number">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="registry-block">
-                    <h3>French Bank Account</h3>
-                    <p>
-                        Account holder: Nicolas Malha<br>
-                        IBAN: FR76 3000 3030 8100 0506 8344 190<br>
-                        Bank address: 38 Rue Gay Lussac, 75005 Paris<br>
-                        Swift code: SOGEFRPP
-                    </p>
+                <!-- Lebanon -->
+                <div class="registry-card">
+                    <div class="registry-card-header" style="background-image: url('images/beirut-skyline.jpg'); background-position: center 60%;">
+                        <span class="registry-card-currency">USD</span>
+                        <p class="registry-card-country">Lebanon</p>
+                        <p class="registry-card-bank">Bank Audi Neo</p>
+                    </div>
+                    <div class="registry-card-body">
+                        <div class="registry-field">
+                            <div class="registry-field-text">
+                                <span class="registry-label">Account holder</span>
+                                <span class="registry-value">Nicolas Malha</span>
+                            </div>
+                            <button class="copy-btn" data-copy="Nicolas Malha" aria-label="Copy account holder">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            </button>
+                        </div>
+                        <div class="registry-field">
+                            <div class="registry-field-text">
+                                <span class="registry-label">IBAN</span>
+                                <span class="registry-value">LB39 0056 9984 0103 5010 1879 0004</span>
+                            </div>
+                            <button class="copy-btn" data-copy="LB39005699840103501018790004" aria-label="Copy IBAN">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            </button>
+                        </div>
+                        <div class="registry-field">
+                            <div class="registry-field-text">
+                                <span class="registry-label">SWIFT Code</span>
+                                <span class="registry-value">AUDBLBBX</span>
+                            </div>
+                            <button class="copy-btn" data-copy="AUDBLBBX" aria-label="Copy SWIFT code">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <p class="section-text registry-note">
-                    Your generosity means the world to us. Thank you for being part of our celebration!
-                </p>
             </div>
+
+            <!-- Closing note -->
+            <div class="registry-note-block">
+                <div class="registry-note-ornament">♡</div>
+                <p class="registry-note-text">Your generosity means the world to us. Thank you for being part of our celebration!</p>
+            </div>
+
         </section>
     </main>
 
@@ -107,7 +376,7 @@
                 <path d="M25 10 Q30 4 36 2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
             </svg>
         </div>
-        <p class="footer-date">18 September &nbsp;·&nbsp; Lebanon</p>
+        <p class="footer-date">1 August &nbsp;·&nbsp; Lebanon</p>
     </footer>
 
     <!-- Scripts -->
@@ -118,6 +387,43 @@
         function updateNav() { nav.classList.toggle('scrolled', window.scrollY > 80); }
         window.addEventListener('scroll', updateNav, { passive: true });
         updateNav();
+
+        // Copy-to-clipboard for registry fields
+        var COPY_SVG  = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+        var CHECK_SVG = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>';
+
+        document.querySelectorAll('.copy-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var text = btn.getAttribute('data-copy');
+                if (!text) return;
+
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerHTML = CHECK_SVG;
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.innerHTML = COPY_SVG;
+                        btn.classList.remove('copied');
+                    }, 1800);
+                }).catch(function() {
+                    // Fallback for older browsers
+                    var ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.style.position = 'fixed';
+                    ta.style.opacity = '0';
+                    document.body.appendChild(ta);
+                    ta.focus();
+                    ta.select();
+                    try { document.execCommand('copy'); } catch(e) {}
+                    document.body.removeChild(ta);
+                    btn.innerHTML = CHECK_SVG;
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.innerHTML = COPY_SVG;
+                        btn.classList.remove('copied');
+                    }, 1800);
+                });
+            });
+        });
     </script>
 </body>
 </html>

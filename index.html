@@ -23,8 +23,11 @@
 
     /* ---- HERO (home page overrides only) ---- */
     .hero {
-        background-image: url('images/Home Page/Picture 1 - Top part.jpg');
-        background-position: center 20%;
+        background-image: url('images/Home Page/Picture 1 - Background.jpg');
+        background-size: contain;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-color: #141a10;
     }
     /* Winery-toned overlay: deep forest-green bottom-left → wine dark */
     .hero::before {
@@ -356,9 +359,11 @@
     /* ---- SECTION 4: ITINERARY (winery cellar feel) ---- */
     .itinerary-section {
         background-color: var(--forest);
-        /* Repeating vine-leaf tile — very subtle */
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M20 160 Q50 120 80 140 Q110 160 140 110 Q160 75 180 90' stroke='rgba(255,255,255,0.04)' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3Cellipse cx='80' cy='130' rx='14' ry='9' transform='rotate(-30 80 130)' fill='rgba(255,255,255,0.03)'/%3E%3Cellipse cx='140' cy='108' rx='14' ry='9' transform='rotate(-55 140 108)' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='100' cy='155' r='4' fill='rgba(107,45,62,0.15)'/%3E%3Ccircle cx='108' cy='162' r='4' fill='rgba(107,45,62,0.15)'/%3E%3Ccircle cx='92' cy='162' r='4' fill='rgba(107,45,62,0.15)'/%3E%3C/svg%3E");
-        background-size: 200px 200px;
+        /* Subtle linen cross-hatch — matches the parchment section texture above */
+        background-image:
+            repeating-linear-gradient(45deg,  rgba(255,255,255,0.025) 0, rgba(255,255,255,0.025) 1px, transparent 0, transparent 50%),
+            repeating-linear-gradient(-45deg, rgba(255,255,255,0.025) 0, rgba(255,255,255,0.025) 1px, transparent 0, transparent 50%);
+        background-size: 8px 8px;
         padding: 5rem 2rem;
         position: relative;
     }
@@ -550,6 +555,161 @@
         color: #fff;
     }
 
+    /* ---- ADD TO CALENDAR MODAL ---- */
+    .cal-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+    }
+    .cal-modal[hidden] { display: none; }
+
+    .cal-modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(20, 14, 10, 0.65);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        animation: calFadeIn 0.22s ease both;
+    }
+
+    .cal-modal-card {
+        position: relative;
+        z-index: 1;
+        background: var(--cream);
+        border-radius: 16px;
+        box-shadow:
+            0 0 0 1px rgba(107,45,62,0.1),
+            0 24px 80px rgba(0,0,0,0.28);
+        width: 100%;
+        max-width: 420px;
+        overflow: hidden;
+        animation: calSlideUp 0.28s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .cal-modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(0,0,0,0.06);
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--text-medium);
+        transition: background 0.2s, color 0.2s;
+        z-index: 2;
+    }
+    .cal-modal-close:hover {
+        background: rgba(107,45,62,0.1);
+        color: var(--wine);
+    }
+
+    .cal-modal-header {
+        background: var(--forest);
+        background-image:
+            repeating-linear-gradient(45deg,  rgba(255,255,255,0.025) 0, rgba(255,255,255,0.025) 1px, transparent 0, transparent 50%),
+            repeating-linear-gradient(-45deg, rgba(255,255,255,0.025) 0, rgba(255,255,255,0.025) 1px, transparent 0, transparent 50%);
+        background-size: 8px 8px;
+        padding: 2.2rem 2rem 1.8rem;
+        text-align: center;
+        color: #fff;
+    }
+
+    .cal-modal-icon {
+        width: 44px;
+        height: 44px;
+        background: rgba(255,255,255,0.12);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        color: rgba(255,255,255,0.9);
+    }
+    .cal-modal-icon svg { width: 22px; height: 22px; }
+
+    .cal-modal-title {
+        font-family: var(--font-heading);
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.5);
+        margin-bottom: 0.4rem;
+    }
+    .cal-modal-event {
+        font-family: var(--font-script);
+        font-size: 2rem;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+    }
+    .cal-modal-meta {
+        font-family: var(--font-body);
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.5);
+    }
+
+    .cal-modal-options {
+        padding: 1rem 0;
+    }
+
+    .cal-modal-btn {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        padding: 0.9rem 1.5rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        text-decoration: none;
+        color: var(--text-dark);
+        transition: background 0.18s;
+        border-top: 1px solid var(--border-light);
+    }
+    .cal-modal-btn:first-child { border-top: none; }
+    .cal-modal-btn:hover {
+        background: rgba(107,45,62,0.04);
+    }
+    .cal-modal-btn strong {
+        display: block;
+        font-family: var(--font-body);
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        letter-spacing: 0.02em;
+    }
+    .cal-modal-btn small {
+        font-family: var(--font-body);
+        font-size: 0.72rem;
+        color: var(--text-light);
+        letter-spacing: 0.02em;
+    }
+    .cal-modal-btn:hover strong { color: var(--wine); }
+    .cal-arrow { margin-left: auto; color: var(--text-light); flex-shrink: 0; }
+    .cal-modal-btn:hover .cal-arrow { color: var(--wine); }
+
+    @keyframes calFadeIn  { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes calSlideUp { from { opacity: 0; transform: translateY(24px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    /* ---- INFO CARDS — equal button widths ---- */
+    .info-card .card-place-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
 
     /* ---- PHOTO STRIP ---- */
     .photo-strip {
@@ -694,9 +854,8 @@
         </button>
         <ul class="nav-links">
             <li><a href="index.html">Welcome</a></li>
-            <li><a href="our-story.html">Our Story</a></li>
             <li><a href="travel.html">Travel &amp; Accommodation</a></li>
-            <li><a href="registry.html">Our Registry</a></li>
+            <li><a href="registry.html">Wedding Registry</a></li>
             <li><a href="rsvp.html">RSVP</a></li>
         </ul>
     </nav>
@@ -711,14 +870,23 @@
                 <div class="hero-accent-block">
                     <div class="hero-accent-line"></div>
                     <div class="hero-subtitle-block">
-                        <p>18 September &nbsp;·&nbsp; Lebanon</p>
-                        <p>Join us as we celebrate our love</p>
+                        <p>1 August &nbsp;·&nbsp; Lebanon</p>
+                        <p>Join us as we celebrate our marriage</p>
                     </div>
                 </div>
                 <div class="hero-cta">
                     <a href="rsvp.html" class="btn-outline-white">RSVP</a>
-                    <a href="registry.html" class="btn-outline-white">Our Registry</a>
+                    <a href="registry.html" class="btn-outline-white">Registry</a>
                     <a href="#wedding-details" class="btn-outline-white">Wedding Details</a>
+                    <button class="btn-outline-white" id="cal-trigger" onclick="openCalModal()">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:13px;height:13px;vertical-align:middle;margin-right:5px;flex-shrink:0;">
+                            <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Add to Calendar
+                    </button>
                 </div>
             </div>
         </section>
@@ -766,7 +934,7 @@
                 <div class="info-card">
                     <img src="images/Rings.svg" alt="Date" class="card-icon">
                     <p class="card-label">Date &amp; Location</p>
-                    <p class="card-value">18 September</p>
+                    <p class="card-value">1 August</p>
                     <p class="card-sub">Lebanon</p>
                 </div>
 
@@ -802,41 +970,11 @@
         </section>
 
 
-        <!-- ==================== SECTION 3b: MAPS ==================== -->
-        <section class="maps-section">
-            <div class="maps-grid">
-
-                <!-- Church map -->
-                <div class="map-card">
-                    <div class="map-card-label">
-                        <span class="map-card-tag">Ceremony</span>
-                        <h3 class="map-card-title">St Maroun Church</h3>
-                        <p class="map-card-sub">Beirut, Lebanon</p>
-                    </div>
-                    <div class="map-embed" id="map-church" style="height:300px;width:100%;"></div>
-                    <a href="https://maps.app.goo.gl/B5763VcUenxgmd44A" target="_blank" class="map-card-btn">Open in Google Maps</a>
-                </div>
-
-                <!-- Winery map -->
-                <div class="map-card">
-                    <div class="map-card-label">
-                        <span class="map-card-tag">Cocktail &amp; Dinner</span>
-                        <h3 class="map-card-title">Ixsir Winery</h3>
-                        <p class="map-card-sub">Lebanon</p>
-                    </div>
-                    <div class="map-embed" id="map-winery" style="height:300px;width:100%;"></div>
-                    <a href="https://maps.app.goo.gl/fbhv8z9wLBR5VeKf6" target="_blank" class="map-card-btn">Open in Google Maps</a>
-                </div>
-
-            </div>
-        </section>
-
-
         <!-- ==================== SECTION 4: ITINERARY ==================== -->
         <section class="itinerary-section">
             <div class="section-content">
                 <h2 class="itinerary-heading">The Itinerary</h2>
-                <p class="itinerary-subheading">18 September &nbsp;·&nbsp; Lebanon</p>
+                <p class="itinerary-subheading">1 August &nbsp;·&nbsp; Lebanon</p>
 
                 <div class="itinerary-timeline">
 
@@ -861,46 +999,20 @@
                             <img src="images/Camera.svg" alt="" class="timeline-icon">
                         </div>
                         <div class="timeline-right">
-                            <p class="timeline-time">6:00 PM</p>
+                            <p class="timeline-time">6:30 PM</p>
                             <p class="timeline-label">Cocktail &amp; Photos</p>
                         </div>
                     </div>
 
-                    <!-- Welcome Toasts — LEFT -->
+                    <!-- Dinner Reception — LEFT -->
                     <div class="timeline-row left-item">
                         <div class="timeline-left">
-                            <p class="timeline-time">7:30 PM</p>
-                            <p class="timeline-label">Welcome Toasts</p>
+                            <p class="timeline-time">8:30 PM</p>
+                            <p class="timeline-label">Dinner Reception</p>
                         </div>
-                        <div class="timeline-center">
-                            <div class="timeline-dot"></div>
-                            <img src="images/Toast.svg" alt="" class="timeline-icon">
-                        </div>
-                        <div class="timeline-empty"></div>
-                    </div>
-
-                    <!-- Dinner — RIGHT -->
-                    <div class="timeline-row right-item">
-                        <div class="timeline-empty"></div>
                         <div class="timeline-center">
                             <div class="timeline-dot"></div>
                             <img src="images/Dinner.svg" alt="" class="timeline-icon">
-                        </div>
-                        <div class="timeline-right">
-                            <p class="timeline-time">8:00 PM</p>
-                            <p class="timeline-label">Dinner</p>
-                        </div>
-                    </div>
-
-                    <!-- Dance — LEFT -->
-                    <div class="timeline-row left-item">
-                        <div class="timeline-left">
-                            <p class="timeline-time">9:30 PM</p>
-                            <p class="timeline-label">Dance</p>
-                        </div>
-                        <div class="timeline-center">
-                            <div class="timeline-dot"></div>
-                            <img src="images/Music.svg" alt="" class="timeline-icon">
                         </div>
                         <div class="timeline-empty"></div>
                     </div>
@@ -913,20 +1025,20 @@
                             <img src="images/Cake.svg" alt="" class="timeline-icon">
                         </div>
                         <div class="timeline-right">
-                            <p class="timeline-time">10:30 PM</p>
+                            <p class="timeline-time">11:00 PM</p>
                             <p class="timeline-label">Cake Cutting</p>
                         </div>
                     </div>
 
-                    <!-- Grand Exit — LEFT -->
+                    <!-- Dance All Night — LEFT -->
                     <div class="timeline-row left-item">
                         <div class="timeline-left">
-                            <p class="timeline-time">12:00 AM</p>
-                            <p class="timeline-label">Grand Exit</p>
+                            <p class="timeline-time">11:00 PM onwards</p>
+                            <p class="timeline-label">Dance All Night!</p>
                         </div>
                         <div class="timeline-center">
                             <div class="timeline-dot"></div>
-                            <img src="images/Welcome.svg" alt="" class="timeline-icon">
+                            <img src="images/Music.svg" alt="" class="timeline-icon">
                         </div>
                         <div class="timeline-empty"></div>
                     </div>
@@ -968,11 +1080,73 @@
         <!-- ==================== SECTION 6: PHOTO STRIP ==================== -->
         <section class="photo-strip" style="background-image: url('images/Home Page/lebanon-sunset-mountains-scenery-sunsets-sunset-6-3-2019-10-53-29-pm-m.jpg');">
             <div class="photo-strip-content">
-                <p class="photo-strip-text">Join us as we celebrate our love</p>
+                <p class="photo-strip-text">Join us as we celebrate our marriage</p>
             </div>
         </section>
 
     </main>
+
+
+    <!-- ==================== ADD TO CALENDAR MODAL ==================== -->
+    <div id="cal-modal" class="cal-modal" hidden role="dialog" aria-modal="true" aria-labelledby="cal-modal-title">
+        <div class="cal-modal-backdrop" onclick="closeCalModal()"></div>
+        <div class="cal-modal-card">
+
+            <!-- Close button -->
+            <button class="cal-modal-close" onclick="closeCalModal()" aria-label="Close">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+                    <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+
+            <!-- Header -->
+            <div class="cal-modal-header">
+                <div class="cal-modal-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="1.8"/>
+                    </svg>
+                </div>
+                <h2 class="cal-modal-title" id="cal-modal-title">Save the Date</h2>
+                <p class="cal-modal-event">Nicolas &amp; Cecilia's Wedding</p>
+                <p class="cal-modal-meta">1 August 2026 &nbsp;·&nbsp; 4:30 PM &nbsp;·&nbsp; Lebanon</p>
+            </div>
+
+            <!-- Options -->
+            <div class="cal-modal-options">
+                <a id="cal-google-link" href="#" target="_blank" rel="noopener" class="cal-modal-btn" onclick="closeCalModal()">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="18" rx="2" fill="#4285F4" stroke="none"/><rect x="3" y="4" width="18" height="9" fill="#4285F4" stroke="none"/><rect x="3" y="13" width="18" height="9" rx="0 0 2 2" fill="#fff" stroke="none"/><line x1="3" y1="13" x2="21" y2="13" stroke="#E0E0E0" stroke-width="1"/><text x="12" y="21" font-family="Arial" font-size="7" font-weight="bold" fill="#4285F4" text-anchor="middle">G</text></svg>
+                    <span>
+                        <strong>Google Calendar</strong>
+                        <small>Opens in a new tab</small>
+                    </span>
+                    <svg class="cal-arrow" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+
+                <button class="cal-modal-btn" onclick="downloadIcs(); closeCalModal();">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="18" rx="2" fill="#1a1a1a" stroke="none"/><line x1="3" y1="10" x2="21" y2="10" stroke="#fff" stroke-width="1.2"/><text x="12" y="20" font-family="Arial" font-size="6" font-weight="bold" fill="#fff" text-anchor="middle">iCAL</text></svg>
+                    <span>
+                        <strong>Apple Calendar</strong>
+                        <small>Downloads .ics file</small>
+                    </span>
+                    <svg class="cal-arrow" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+
+                <button class="cal-modal-btn" onclick="downloadIcs(); closeCalModal();">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="18" rx="2" fill="#0072C6" stroke="none"/><line x1="3" y1="10" x2="21" y2="10" stroke="#fff" stroke-width="1.2"/><text x="12" y="20" font-family="Arial" font-size="5.5" font-weight="bold" fill="#fff" text-anchor="middle">OL</text></svg>
+                    <span>
+                        <strong>Outlook</strong>
+                        <small>Downloads .ics file</small>
+                    </span>
+                    <svg class="cal-arrow" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </div>
+
+        </div>
+    </div>
 
 
     <!-- ==================== FOOTER ==================== -->
@@ -988,7 +1162,7 @@
                 <path d="M25 10 Q30 4 36 2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
             </svg>
         </div>
-        <p class="footer-date">18 September &nbsp;·&nbsp; Lebanon</p>
+        <p class="footer-date">1 August &nbsp;·&nbsp; Lebanon</p>
     </footer>
 
 
@@ -1065,6 +1239,93 @@
             document.addEventListener('DOMContentLoaded', initMaps);
         } else {
             initMaps();
+        }
+
+        // ---- ADD TO CALENDAR MODAL ----
+        // Full description text (used by both ICS and Google Calendar)
+        var CAL_DESCRIPTION_PLAIN =
+            'You are cordially invited to celebrate the marriage of Nicolas & Cecilia.\n\n' +
+            '📅 1 August 2026 · Lebanon\n' +
+            '🌐 [INVITE LINK — update once website is live]\n\n' +
+            'Timeline of the day:\n' +
+            '· 4:30 PM  — Ceremony (St Maroun Church, Beirut)\n' +
+            '· 6:30 PM  — Cocktail & Photos (Ixsir Winery, Lebanon)\n' +
+            '· 8:30 PM  — Dinner Reception\n' +
+            '· 11:00 PM — Cake Cutting\n' +
+            '· 11:00 PM onwards — Dance All Night!';
+
+        // Build Google Calendar URL on page load
+        (function () {
+            var gcUrl =
+                'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+                '&text=' + encodeURIComponent("Nicolas & Cecilia's Wedding") +
+                '&dates=20260801T133000Z%2F20260801T230000Z' +  // 4:30 PM – 2:00 AM Lebanon (UTC+3)
+                '&details=' + encodeURIComponent(CAL_DESCRIPTION_PLAIN) +
+                '&location=' + encodeURIComponent('St Maroun Church, Gemmayzeh, Beirut, Lebanon');
+            var link = document.getElementById('cal-google-link');
+            if (link) link.href = gcUrl;
+        })();
+
+        function openCalModal() {
+            var modal = document.getElementById('cal-modal');
+            modal.hidden = false;
+            document.body.style.overflow = 'hidden';
+            // Focus trap: move focus into modal
+            setTimeout(function () {
+                var close = modal.querySelector('.cal-modal-close');
+                if (close) close.focus();
+            }, 50);
+        }
+
+        function closeCalModal() {
+            var modal = document.getElementById('cal-modal');
+            modal.hidden = true;
+            document.body.style.overflow = '';
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeCalModal();
+        });
+
+        function downloadIcs() {
+            // ICS uses \n for newlines inside DESCRIPTION, commas escaped as \,
+            var desc = CAL_DESCRIPTION_PLAIN
+                .replace(/,/g, '\\,')
+                .replace(/\n/g, '\\n');
+
+            var lines = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Nicolas & Cecilia Wedding//EN',
+                'CALSCALE:GREGORIAN',
+                'METHOD:PUBLISH',
+                'BEGIN:VEVENT',
+                'DTSTART:20260801T163000',   // 4:30 PM Lebanon local time
+                'DTEND:20260802T020000',     // 2:00 AM Lebanon local time (next day)
+                "SUMMARY:Nicolas & Cecilia's Wedding",
+                'DESCRIPTION:' + desc,
+                'LOCATION:St Maroun Church\\, Gemmayzeh\\, Beirut\\, Lebanon',
+                'STATUS:CONFIRMED',
+                'SEQUENCE:0',
+                'BEGIN:VALARM',
+                'TRIGGER:-P1D',
+                'ACTION:DISPLAY',
+                "DESCRIPTION:Nicolas & Cecilia's Wedding is tomorrow!",
+                'END:VALARM',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ];
+            var ics  = lines.join('\r\n');
+            var blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+            var url  = URL.createObjectURL(blob);
+            var a    = document.createElement('a');
+            a.href     = url;
+            a.download = 'nicolas-cecilia-wedding.ics';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
     </script>
 </body>
