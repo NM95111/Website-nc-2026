@@ -12,6 +12,47 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ---- RSVP success state ---- */
+        .rsvp-success {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        .rsvp-success-icon {
+            color: var(--wine, #6b2d3e);
+            margin-bottom: 1.5rem;
+            opacity: 0.75;
+        }
+        .rsvp-success-icon svg {
+            width: 52px;
+            height: 52px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .rsvp-success h2 {
+            font-family: var(--font-script, 'Great Vibes', cursive);
+            font-size: 2.6rem;
+            color: var(--wine, #6b2d3e);
+            margin-bottom: 0.8rem;
+        }
+        .rsvp-success p {
+            font-family: var(--font-body, 'Montserrat', sans-serif);
+            font-size: 0.9rem;
+            letter-spacing: 0.06em;
+            color: var(--text-medium, #666);
+            line-height: 1.7;
+        }
+
+        /* ---- Submit button loading state ---- */
+        .btn-sage:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -59,7 +100,7 @@
         <!-- RSVP Form (White) -->
         <section class="section section-white">
             <div class="section-inner">
-                <form class="rsvp-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <form class="rsvp-form" id="rsvp-form" novalidate>
                     <div class="form-group">
                         <label for="full-name">Full Name</label>
                         <input
@@ -154,6 +195,49 @@
         function updateNav() { nav.classList.toggle('scrolled', window.scrollY > 80); }
         window.addEventListener('scroll', updateNav, { passive: true });
         updateNav();
+
+        // ---- RSVP form → Google Sheets ----
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxgPCV-nKfkCa9oq9mVAQPeJ0yyALPDd8PfhzVGuX3jHbD316ubfZfaGGQL9_K5TXNO/exec';
+
+        document.getElementById('rsvp-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Basic HTML5 validation
+            if (!this.checkValidity()) {
+                this.reportValidity();
+                return;
+            }
+
+            var form = this;
+            var btn  = form.querySelector('button[type="submit"]');
+            btn.textContent = 'Sending…';
+            btn.disabled = true;
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body:   new FormData(form),
+                mode:   'no-cors'          // Apps Script doesn't return CORS headers
+            })
+            .then(function () {
+                // Replace the form with a warm confirmation
+                var wrapper = form.closest('.section-inner') || form.parentNode;
+                wrapper.innerHTML =
+                    '<div class="rsvp-success">' +
+                        '<div class="rsvp-success-icon">' +
+                            '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+                                '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>' +
+                            '</svg>' +
+                        '</div>' +
+                        '<h2>Thank you!</h2>' +
+                        '<p>Your RSVP has been received.<br>We can\'t wait to celebrate with you on 1 August.</p>' +
+                    '</div>';
+            })
+            .catch(function () {
+                btn.textContent = 'Submit RSVP';
+                btn.disabled = false;
+                alert('Something went wrong — please try again or contact us directly.');
+            });
+        });
     </script>
 </body>
 </html>
