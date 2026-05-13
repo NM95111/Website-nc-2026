@@ -1253,7 +1253,7 @@
         var CAL_DESCRIPTION_PLAIN =
             'You are cordially invited to celebrate the marriage of Nicolas & Cecilia.\n\n' +
             '📅 1 August 2026 · Lebanon\n' +
-            '🌐 [INVITE LINK — update once website is live]\n\n' +
+            '🌐 https://nicolas-cecilia2026.com\n\n' +
             'Timeline of the day:\n' +
             '· 4:30 PM  — Ceremony (St Maroun Church, Beirut)\n' +
             '· 6:30 PM  — Cocktail & Photos (Ixsir Winery, Lebanon)\n' +
@@ -1261,16 +1261,29 @@
             '· 11:00 PM — Cake Cutting\n' +
             '· 11:00 PM onwards — Dance All Night!';
 
-        // Build Google Calendar URL on page load
+        // Build Google Calendar URL — with app deep-link on Android
         (function () {
-            var gcUrl =
-                'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+            var params =
+                'action=TEMPLATE' +
                 '&text=' + encodeURIComponent("Nicolas & Cecilia's Wedding") +
                 '&dates=20260801T133000Z%2F20260801T230000Z' +  // 4:30 PM – 2:00 AM Lebanon (UTC+3)
                 '&details=' + encodeURIComponent(CAL_DESCRIPTION_PLAIN) +
                 '&location=' + encodeURIComponent('St Maroun Church, Gemmayzeh, Beirut, Lebanon');
-            var link = document.getElementById('cal-google-link');
-            if (link) link.href = gcUrl;
+
+            var webUrl = 'https://calendar.google.com/calendar/render?' + params;
+            var link   = document.getElementById('cal-google-link');
+            if (!link) return;
+
+            if (/Android/i.test(navigator.userAgent)) {
+                // Android intent URL → opens Google Calendar app directly,
+                // falls back to the web version if the app isn't installed
+                link.href = 'intent://calendar.google.com/calendar/render?' + params +
+                    '#Intent;scheme=https;package=com.google.android.calendar;' +
+                    'S.browser_fallback_url=' + encodeURIComponent(webUrl) + ';end';
+                link.removeAttribute('target'); // intent links don't use a new tab
+            } else {
+                link.href = webUrl;
+            }
         })();
 
         function openCalModal() {
