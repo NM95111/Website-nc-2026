@@ -52,6 +52,48 @@
             opacity: 0.6;
             cursor: not-allowed;
         }
+
+        /* ---- Guest name rows ---- */
+        #guest-names-group {
+            animation: slideDown 0.28s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .guest-names-section {
+            border-top: 1px solid rgba(0,0,0,0.07);
+            padding-top: 1rem;
+            margin-top: 0.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .guest-name-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .guest-name-label {
+            font-family: var(--font-body);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-light, #999);
+            min-width: 62px;
+            flex-shrink: 0;
+        }
+        .guest-name-row input {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        .guest-name-row.is-self input {
+            background: rgba(107,45,62,0.04);
+            border-color: rgba(107,45,62,0.18);
+            color: var(--text-medium, #777);
+            cursor: default;
+        }
     </style>
 </head>
 <body>
@@ -125,16 +167,19 @@
 
                     <div class="form-group">
                         <label for="guests">Number of Guests</label>
-                        <input
-                            type="number"
-                            id="guests"
-                            name="num_guests"
-                            min="1"
-                            max="10"
-                            value="1"
-                            required
-                            aria-label="Number of guests attending"
-                        >
+                        <select id="guests" name="num_guests" required aria-label="Number of guests attending">
+                            <option value="1">1 — Just me</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <!-- Guest names — revealed dynamically -->
+                    <div class="form-group" id="guest-names-group" style="display:none;">
+                        <label>Guest Names</label>
+                        <div class="guest-names-section" id="guest-names-inner"></div>
                     </div>
 
                     <div class="form-group">
@@ -197,29 +242,92 @@
         updateNav();
 
         // ---- RSVP form → Google Sheets ----
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxgPCV-nKfkCa9oq9mVAQPeJ0yyALPDd8PfhzVGuX3jHbD316ubfZfaGGQL9_K5TXNO/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzMkDcVSrDInci7xWy2NAryvXoy0WUMSh2YOFXk2-4jUVTA_M25siKBpSZGrwc8Agky/exec';
 
+        var fullNameInput    = document.getElementById('full-name');
+        var guestsSelect     = document.getElementById('guests');
+        var guestNamesGroup  = document.getElementById('guest-names-group');
+        var guestNamesInner  = document.getElementById('guest-names-inner');
+
+        // Build / rebuild guest name rows whenever the count changes
+        function buildGuestFields(count) {
+            count = parseInt(count) || 1;
+            guestNamesInner.innerHTML = '';
+
+            if (count < 2) {
+                guestNamesGroup.style.display = 'none';
+                return;
+            }
+
+            guestNamesGroup.style.display = 'block';
+
+            for (var i = 1; i <= count; i++) {
+                var row = document.createElement('div');
+                row.className = 'guest-name-row' + (i === 1 ? ' is-self' : '');
+
+                var lbl = document.createElement('span');
+                lbl.className = 'guest-name-label';
+                lbl.textContent = 'Guest ' + i;
+
+                var inp = document.createElement('input');
+                inp.type = 'text';
+                inp.name = 'guest_' + i;
+                inp.id   = 'guest-field-' + i;
+                inp.placeholder = i === 1 ? 'Your name' : 'Full name';
+
+                if (i === 1) {
+                    inp.value    = fullNameInput.value;
+                    inp.readOnly = true;
+                    inp.tabIndex = -1;
+                } else {
+                    inp.required = true;
+                }
+
+                row.appendChild(lbl);
+                row.appendChild(inp);
+                guestNamesInner.appendChild(row);
+            }
+        }
+
+        // Keep Guest 1 in sync with the Full Name field
+        fullNameInput.addEventListener('input', function () {
+            var g1 = document.getElementById('guest-field-1');
+            if (g1) g1.value = this.value;
+        });
+
+        guestsSelect.addEventListener('change', function () { buildGuestFields(this.value); });
+
+        // ---- Submit ----
         document.getElementById('rsvp-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Basic HTML5 validation
-            if (!this.checkValidity()) {
-                this.reportValidity();
-                return;
-            }
+            if (!this.checkValidity()) { this.reportValidity(); return; }
 
             var form = this;
             var btn  = form.querySelector('button[type="submit"]');
             btn.textContent = 'Sending…';
             btn.disabled = true;
 
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                body:   new FormData(form),
-                mode:   'no-cors'          // Apps Script doesn't return CORS headers
-            })
+            // Collect form data + metadata
+            var fd = new FormData(form);
+
+            // Device & browser
+            var ua = navigator.userAgent;
+            var device  = /Mobi|Android|iPhone|iPad|iPod/.test(ua) ? 'Mobile' : 'Desktop';
+            var browser = 'Unknown';
+            if      (/Edg\//.test(ua))                          browser = 'Edge';
+            else if (/OPR\/|Opera/.test(ua))                    browser = 'Opera';
+            else if (/Chrome\//.test(ua))                       browser = 'Chrome';
+            else if (/Firefox\//.test(ua))                      browser = 'Firefox';
+            else if (/Safari\//.test(ua) && !/Chrome/.test(ua)) browser = 'Safari';
+
+            fd.append('device',    device + ' · ' + browser);
+            fd.append('screen',    screen.width + '×' + screen.height);
+            fd.append('language',  navigator.language || '—');
+            fd.append('timezone',  Intl.DateTimeFormat().resolvedOptions().timeZone || '—');
+
+            fetch(SCRIPT_URL, { method: 'POST', body: fd, mode: 'no-cors' })
             .then(function () {
-                // Replace the form with a warm confirmation
                 var wrapper = form.closest('.section-inner') || form.parentNode;
                 wrapper.innerHTML =
                     '<div class="rsvp-success">' +
