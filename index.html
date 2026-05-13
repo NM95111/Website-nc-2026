@@ -27,7 +27,25 @@
         background-size: contain;
         background-position: center top;
         background-repeat: no-repeat;
-        background-color: #141a10;
+        background-color: transparent;
+    }
+    /* On mobile: taller hero so buttons sit fully in the dark zone below the photo */
+    @media (max-width: 768px) {
+        .hero {
+            height: 100svh;
+            min-height: 680px;
+        }
+    }
+
+    /* Blurred fill for the side areas when photo is narrower than viewport */
+    .hero-blur-fill {
+        position: absolute;
+        inset: -40px; /* overflow prevents visible blur edges */
+        background-image: url('images/Home Page/Picture 1 - Background.jpg');
+        background-size: cover;
+        background-position: center top;
+        filter: blur(22px) brightness(0.45) saturate(0.8);
+        z-index: -1;
     }
     /* Winery-toned overlay: deep forest-green bottom-left → wine dark */
     .hero::before {
@@ -864,6 +882,7 @@
 
         <!-- ==================== SECTION 1: HERO ==================== -->
         <section class="hero">
+            <div class="hero-blur-fill"></div>
             <div class="hero-content">
                 <span class="hero-page-label">Wedding Invitation</span>
                 <h1 class="script-heading">Nicolas &amp; Cecilia</h1>
